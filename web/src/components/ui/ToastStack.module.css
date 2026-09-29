@@ -1,0 +1,38 @@
+.stack {
+  position: fixed;
+  bottom: var(--sp-5);
+  left: var(--sp-5);
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  max-width: min(360px, calc(100vw - 2 * var(--sp-5)));
+}
+
+.toast {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-ink);
+  color: var(--color-bg-elevated);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4) var(--sp-5);
+  box-shadow: var(--shadow-lg);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+}
+
+.success {
+  background: var(--color-success);
+}
+
+.error {
+  background: var(--color-danger);
+}
+
+.progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  background: rgba(253, 251, 246, 0.55);
+}

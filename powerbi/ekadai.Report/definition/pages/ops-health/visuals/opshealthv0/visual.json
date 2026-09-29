@@ -1,0 +1,277 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "opshealthv0",
+  "position": {
+    "x": 5.4888691602874422,
+    "y": 402.05966599105517,
+    "z": 0,
+    "height": 300,
+    "width": 1248
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "pipeline_runs"
+                    }
+                  },
+                  "Property": "started_at"
+                }
+              },
+              "queryRef": "pipeline_runs.started_at",
+              "nativeQueryRef": "started_at"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "pipeline_runs"
+                    }
+                  },
+                  "Property": "state"
+                }
+              },
+              "queryRef": "pipeline_runs.state",
+              "nativeQueryRef": "state"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "pipeline_runs"
+                    }
+                  },
+                  "Property": "cause"
+                }
+              },
+              "queryRef": "pipeline_runs.cause",
+              "nativeQueryRef": "cause"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "pipeline_runs"
+                    }
+                  },
+                  "Property": "duration_seconds"
+                }
+              },
+              "queryRef": "pipeline_runs.duration_seconds",
+              "nativeQueryRef": "duration_seconds"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "pipeline_runs"
+                    }
+                  },
+                  "Property": "failed_flow_events"
+                }
+              },
+              "queryRef": "pipeline_runs.failed_flow_events",
+              "nativeQueryRef": "failed_flow_events"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "pipeline_runs"
+                    }
+                  },
+                  "Property": "error_events"
+                }
+              },
+              "queryRef": "pipeline_runs.error_events",
+              "nativeQueryRef": "error_events"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "pipeline_runs"
+                    }
+                  },
+                  "Property": "update_id"
+                }
+              },
+              "queryRef": "pipeline_runs.update_id",
+              "nativeQueryRef": "update_id"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Pipeline runs'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "fbee11206d88a49b254a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "pipeline_runs"
+              }
+            },
+            "Property": "started_at"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "167e3479a3001dbaac37",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "pipeline_runs"
+              }
+            },
+            "Property": "state"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "d6aaf95f0304a0cc5c1c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "pipeline_runs"
+              }
+            },
+            "Property": "cause"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "6dfb7d7d1b46e70d633d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "pipeline_runs"
+              }
+            },
+            "Property": "duration_seconds"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "7a54cc0a8001811e7067",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "pipeline_runs"
+              }
+            },
+            "Property": "failed_flow_events"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "272ca464109564a8e950",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "pipeline_runs"
+              }
+            },
+            "Property": "error_events"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "272921742552920e0605",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "pipeline_runs"
+              }
+            },
+            "Property": "update_id"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+[
+  { "category_name": "Electronics", "category_status": "ACTIVE" },
+  { "category_name": "Clothing", "category_status": "ACTIVE" },
+  { "category_name": "Home & Kitchen", "category_status": "ACTIVE" },
+  { "category_name": "Fitness", "category_status": "ACTIVE" },
+  { "category_name": "Books", "category_status": "ACTIVE" },
+  { "category_name": "Accessories", "category_status": "ACTIVE" },
+  { "category_name": "Beauty", "category_status": "ACTIVE" }
+]

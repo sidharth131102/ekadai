@@ -1,0 +1,63 @@
+table cdc_connector_health
+	lineageTag: 1e4518c9-b954-41f0-999e-c32fc0e02c31
+
+	column captured_at
+		dataType: dateTime
+		lineageTag: 6c52b663-a2a0-4ec0-adec-2e8bfe2f0584
+		summarizeBy: none
+		sourceColumn: captured_at
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column connector
+		dataType: string
+		lineageTag: 8dfdb914-da33-4a99-bce1-01b11b4b05ba
+		summarizeBy: none
+		sourceColumn: connector
+
+		annotation SummarizationSetBy = Automatic
+
+	column connector_state
+		dataType: string
+		lineageTag: b0060142-0862-4109-ad31-d502aed17eb9
+		summarizeBy: none
+		sourceColumn: connector_state
+
+		annotation SummarizationSetBy = Automatic
+
+	column task_states
+		dataType: string
+		lineageTag: 0c010f47-bfbd-4f92-b37f-3c7766234aab
+		summarizeBy: none
+		sourceColumn: task_states
+
+		annotation SummarizationSetBy = Automatic
+
+	column worker_id
+		dataType: string
+		lineageTag: 5bd9eae5-fb70-4d84-901d-6d7d3be895ed
+		summarizeBy: none
+		sourceColumn: worker_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column error
+		dataType: string
+		lineageTag: f35b4fda-0840-4138-a9a9-a48257876c07
+		summarizeBy: none
+		sourceColumn: error
+
+		annotation SummarizationSetBy = Automatic
+
+	partition cdc_connector_health = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405617818071366.6.azuredatabricks.net", "/sql/1.0/warehouses/68d5a8cb07485e9a", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    Catalog = Source{[Name="ekadai_databricks"]}[Data],
+				    Schema = Catalog{[Name="ops"]}[Data],
+				    Data = Schema{[Name="cdc_connector_health"]}[Data]
+				in
+				    Data
+

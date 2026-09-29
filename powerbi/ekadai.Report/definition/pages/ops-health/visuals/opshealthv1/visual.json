@@ -1,0 +1,249 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "opshealthv1",
+  "position": {
+    "x": 5.4888691602874422,
+    "y": 0,
+    "z": 0,
+    "height": 375.98753747968982,
+    "width": 651.80321278413373
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "pipeline_stage_metrics"
+                    }
+                  },
+                  "Property": "stage"
+                }
+              },
+              "queryRef": "pipeline_stage_metrics.stage",
+              "nativeQueryRef": "stage"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "pipeline_stage_metrics"
+                    }
+                  },
+                  "Property": "flow_name"
+                }
+              },
+              "queryRef": "pipeline_stage_metrics.flow_name",
+              "nativeQueryRef": "flow_name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "pipeline_stage_metrics"
+                    }
+                  },
+                  "Property": "last_status"
+                }
+              },
+              "queryRef": "pipeline_stage_metrics.last_status",
+              "nativeQueryRef": "last_status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "pipeline_stage_metrics"
+                    }
+                  },
+                  "Property": "output_records"
+                }
+              },
+              "queryRef": "pipeline_stage_metrics.output_records",
+              "nativeQueryRef": "output_records"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "pipeline_stage_metrics"
+                    }
+                  },
+                  "Property": "failed_batches"
+                }
+              },
+              "queryRef": "pipeline_stage_metrics.failed_batches",
+              "nativeQueryRef": "failed_batches"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "pipeline_stage_metrics"
+                    }
+                  },
+                  "Property": "last_event_at"
+                }
+              },
+              "queryRef": "pipeline_stage_metrics.last_event_at",
+              "nativeQueryRef": "last_event_at"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Stage → flow metrics'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "55ccd1f0d01b1594b150",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "pipeline_stage_metrics"
+              }
+            },
+            "Property": "stage"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "097c741464a06c5b2aec",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "pipeline_stage_metrics"
+              }
+            },
+            "Property": "flow_name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "3915c38802c75b70ac4e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "pipeline_stage_metrics"
+              }
+            },
+            "Property": "last_status"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "cbd6d66c16e7eccb9d70",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "pipeline_stage_metrics"
+              }
+            },
+            "Property": "output_records"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "428ee04dd330349a7177",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "pipeline_stage_metrics"
+              }
+            },
+            "Property": "failed_batches"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "73afb1e2eadc11cb3707",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "pipeline_stage_metrics"
+              }
+            },
+            "Property": "last_event_at"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

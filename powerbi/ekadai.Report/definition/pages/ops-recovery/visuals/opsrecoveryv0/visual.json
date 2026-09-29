@@ -1,0 +1,376 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "opsrecoveryv0",
+  "position": {
+    "x": 16,
+    "y": 16,
+    "z": 0,
+    "height": 330,
+    "width": 1248
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "backfill_audit"
+                    }
+                  },
+                  "Property": "backfill_id"
+                }
+              },
+              "queryRef": "backfill_audit.backfill_id",
+              "nativeQueryRef": "backfill_id"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "backfill_audit"
+                    }
+                  },
+                  "Property": "status"
+                }
+              },
+              "queryRef": "backfill_audit.status",
+              "nativeQueryRef": "status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "backfill_audit"
+                    }
+                  },
+                  "Property": "started_at"
+                }
+              },
+              "queryRef": "backfill_audit.started_at",
+              "nativeQueryRef": "started_at"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "backfill_audit"
+                    }
+                  },
+                  "Property": "finished_at"
+                }
+              },
+              "queryRef": "backfill_audit.finished_at",
+              "nativeQueryRef": "finished_at"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "backfill_audit"
+                    }
+                  },
+                  "Property": "input_count"
+                }
+              },
+              "queryRef": "backfill_audit.input_count",
+              "nativeQueryRef": "input_count"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "backfill_audit"
+                    }
+                  },
+                  "Property": "output_count"
+                }
+              },
+              "queryRef": "backfill_audit.output_count",
+              "nativeQueryRef": "output_count"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "backfill_audit"
+                    }
+                  },
+                  "Property": "rejected_count"
+                }
+              },
+              "queryRef": "backfill_audit.rejected_count",
+              "nativeQueryRef": "rejected_count"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "backfill_audit"
+                    }
+                  },
+                  "Property": "duplicate_count"
+                }
+              },
+              "queryRef": "backfill_audit.duplicate_count",
+              "nativeQueryRef": "duplicate_count"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "backfill_audit"
+                    }
+                  },
+                  "Property": "missing_count"
+                }
+              },
+              "queryRef": "backfill_audit.missing_count",
+              "nativeQueryRef": "missing_count"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "backfill_audit"
+                    }
+                  },
+                  "Property": "reconciliation_passed"
+                }
+              },
+              "queryRef": "backfill_audit.reconciliation_passed",
+              "nativeQueryRef": "reconciliation_passed"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "backfill_audit"
+                    }
+                  },
+                  "Property": "supersedes_backfill_id"
+                }
+              },
+              "queryRef": "backfill_audit.supersedes_backfill_id",
+              "nativeQueryRef": "supersedes_backfill_id"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Backfill runs'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "618ea6ebae3842da5742",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "backfill_audit"
+              }
+            },
+            "Property": "backfill_id"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "86e0a74108ed414e9e24",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "backfill_audit"
+              }
+            },
+            "Property": "status"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "b95fe2c801733b9c9a37",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "backfill_audit"
+              }
+            },
+            "Property": "started_at"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "3c8e3de1589406311932",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "backfill_audit"
+              }
+            },
+            "Property": "finished_at"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "7219869607bb04102e4e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "backfill_audit"
+              }
+            },
+            "Property": "input_count"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "576aebf10e0a23127eae",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "backfill_audit"
+              }
+            },
+            "Property": "output_count"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "0f3c46cb00060470b404",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "backfill_audit"
+              }
+            },
+            "Property": "rejected_count"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "ddf9f847876110365e62",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "backfill_audit"
+              }
+            },
+            "Property": "duplicate_count"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a7c7a473682de4562ed3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "backfill_audit"
+              }
+            },
+            "Property": "missing_count"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "d491df474c47be2ce8a9",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "backfill_audit"
+              }
+            },
+            "Property": "reconciliation_passed"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "87c4754735530c96a207",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "backfill_audit"
+              }
+            },
+            "Property": "supersedes_backfill_id"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

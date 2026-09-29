@@ -1,0 +1,43 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["dim_date","dim_user","dim_product","dim_category","dim_device","fact_events","fact_sessions","fact_orders","fact_order_items","agg_user_activity","agg_conversion_funnel","agg_product_performance","agg_daily_revenue","agg_order_metrics","agg_product_attribution","pipeline_runs","pipeline_stage_metrics","latency_metrics","data_quality_metrics","reference_resolution_status","late_replay_status","kafka_lag","cdc_connector_health","backfill_audit","reconciliation_results"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table dim_date
+ref table dim_user
+ref table dim_product
+ref table dim_category
+ref table dim_device
+ref table fact_events
+ref table fact_sessions
+ref table fact_orders
+ref table fact_order_items
+ref table agg_user_activity
+ref table agg_conversion_funnel
+ref table agg_product_performance
+ref table agg_daily_revenue
+ref table agg_order_metrics
+ref table agg_product_attribution
+ref table pipeline_runs
+ref table pipeline_stage_metrics
+ref table latency_metrics
+ref table data_quality_metrics
+ref table reference_resolution_status
+ref table late_replay_status
+ref table kafka_lag
+ref table cdc_connector_health
+ref table backfill_audit
+ref table reconciliation_results
+
+ref cultureInfo en-US
+

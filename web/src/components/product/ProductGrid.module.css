@@ -1,0 +1,25 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--sp-5);
+}
+
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--sp-8) var(--sp-4);
+  color: var(--color-ink-muted);
+}
+
+.emptyTitle {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  color: var(--color-ink);
+  margin-bottom: var(--sp-2);
+}
+
+.skeletonCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}

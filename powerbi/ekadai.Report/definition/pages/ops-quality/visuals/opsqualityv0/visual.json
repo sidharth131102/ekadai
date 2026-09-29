@@ -1,0 +1,389 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "opsqualityv0",
+  "position": {
+    "x": 16,
+    "y": 16,
+    "z": 0,
+    "height": 300,
+    "width": 1248
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "data_quality_metrics"
+                    }
+                  },
+                  "Property": "date"
+                }
+              },
+              "queryRef": "data_quality_metrics.date",
+              "nativeQueryRef": "date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "data_quality_metrics"
+                    }
+                  },
+                  "Property": "bronze_records"
+                }
+              },
+              "queryRef": "data_quality_metrics.bronze_records",
+              "nativeQueryRef": "bronze_records"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "data_quality_metrics"
+                    }
+                  },
+                  "Property": "decode_failures"
+                }
+              },
+              "queryRef": "data_quality_metrics.decode_failures",
+              "nativeQueryRef": "decode_failures"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "data_quality_metrics"
+                    }
+                  },
+                  "Property": "valid_events"
+                }
+              },
+              "queryRef": "data_quality_metrics.valid_events",
+              "nativeQueryRef": "valid_events"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "data_quality_metrics"
+                    }
+                  },
+                  "Property": "quarantined"
+                }
+              },
+              "queryRef": "data_quality_metrics.quarantined",
+              "nativeQueryRef": "quarantined"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "data_quality_metrics"
+                    }
+                  },
+                  "Property": "malformed"
+                }
+              },
+              "queryRef": "data_quality_metrics.malformed",
+              "nativeQueryRef": "malformed"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "data_quality_metrics"
+                    }
+                  },
+                  "Property": "business_rule_failures"
+                }
+              },
+              "queryRef": "data_quality_metrics.business_rule_failures",
+              "nativeQueryRef": "business_rule_failures"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "data_quality_metrics"
+                    }
+                  },
+                  "Property": "quarantine_rate"
+                }
+              },
+              "queryRef": "data_quality_metrics.quarantine_rate",
+              "nativeQueryRef": "quarantine_rate"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "data_quality_metrics"
+                    }
+                  },
+                  "Property": "late_events"
+                }
+              },
+              "queryRef": "data_quality_metrics.late_events",
+              "nativeQueryRef": "late_events"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "data_quality_metrics"
+                    }
+                  },
+                  "Property": "too_late_events"
+                }
+              },
+              "queryRef": "data_quality_metrics.too_late_events",
+              "nativeQueryRef": "too_late_events"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "data_quality_metrics"
+                    }
+                  },
+                  "Property": "unresolved_events"
+                }
+              },
+              "queryRef": "data_quality_metrics.unresolved_events",
+              "nativeQueryRef": "unresolved_events"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Daily data quality'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "e1cdf0c015cc33d35500",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "data_quality_metrics"
+              }
+            },
+            "Property": "date"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "7936fa6b7d92248adc9c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "data_quality_metrics"
+              }
+            },
+            "Property": "bronze_records"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "e0f7e0d04c7736877511",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "data_quality_metrics"
+              }
+            },
+            "Property": "decode_failures"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "039d0e80dd569e3dc59e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "data_quality_metrics"
+              }
+            },
+            "Property": "valid_events"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "73af251b310005494898",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "data_quality_metrics"
+              }
+            },
+            "Property": "quarantined"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "24157fbb3e192055b946",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "data_quality_metrics"
+              }
+            },
+            "Property": "malformed"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "e174ec4ddb15101523a1",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "data_quality_metrics"
+              }
+            },
+            "Property": "business_rule_failures"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "4b3fa11dd4168940aaba",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "data_quality_metrics"
+              }
+            },
+            "Property": "quarantine_rate"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "d7653f1c9d740803ac24",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "data_quality_metrics"
+              }
+            },
+            "Property": "late_events"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "1e4c44a2043ec0d9a123",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "data_quality_metrics"
+              }
+            },
+            "Property": "too_late_events"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "9aa16e17012b8459b36b",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "data_quality_metrics"
+              }
+            },
+            "Property": "unresolved_events"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

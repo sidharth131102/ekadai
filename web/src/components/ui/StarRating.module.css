@@ -1,0 +1,21 @@
+.wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+
+.stars {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.count {
+  font-size: var(--fs-2xs);
+  color: var(--color-ink-muted);
+  font-weight: 500;
+}
+
+.empty {
+  font-size: var(--fs-2xs);
+  color: var(--color-ink-faint);
+}

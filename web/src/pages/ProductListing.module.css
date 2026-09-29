@@ -1,0 +1,28 @@
+.page {
+  padding: var(--sp-6) 0 var(--sp-9);
+}
+
+.heading {
+  margin-bottom: var(--sp-2);
+  font-size: var(--fs-2xl);
+}
+
+.resultCount {
+  color: var(--color-ink-muted);
+  font-size: var(--fs-sm);
+  margin-bottom: var(--sp-5);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--sp-4);
+  margin-top: var(--sp-7);
+}
+
+.pageLabel {
+  font-size: var(--fs-sm);
+  color: var(--color-ink-muted);
+  font-variant-numeric: tabular-nums;
+}

@@ -1,0 +1,73 @@
+services:
+  kafka:
+    image: apache/kafka:3.8.0
+    container_name: ekadai-kafka
+    restart: unless-stopped
+    environment:
+      # KRaft, single node, combined broker+controller (§37 — no ZooKeeper).
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      # Fixed cluster ID so a container restart against the same volume doesn't try to
+      # reformat storage with a freshly-generated one.
+      CLUSTER_ID: 0GV8czVET2a9TOf_rCMxzQ
+      # PLAINTEXT: other containers on this compose network (Schema Registry). PLAINTEXT_HOST:
+      # the FastAPI app / host-side scripts, which run on the Windows host, not containerized —
+      # advertised as "localhost", which only resolves correctly for a process on the host
+      # itself. PLAINTEXT_DOCKER (Phase 5): other Docker containers on *different* compose
+      # projects (Debezium Connect) — advertised as "host.docker.internal", which resolves
+      # from inside another container back to the host (Debezium's own compose file maps that
+      # name via extra_hosts), whereas "localhost" from inside another container would just
+      # point at itself and break the post-metadata reconnect.
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093,PLAINTEXT_HOST://:29092,PLAINTEXT_DOCKER://:29093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092,PLAINTEXT_DOCKER://host.docker.internal:29093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT,PLAINTEXT_DOCKER:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      # Single-node cluster — every internal replication factor must be 1 (§37).
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      # 7-day retention (§37) — Kafka is a short-term replay buffer, Bronze is the durable copy.
+      KAFKA_LOG_RETENTION_HOURS: 168
+      # The image's actual default log.dirs is /tmp/kafka-logs, NOT the volume mount path below
+      # — without this, the "persistent" volume mount is silently unused and everything is lost
+      # on container recreation (discovered the hard way in Phase 5; see bugs_and_fixes.md).
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+    ports:
+      - "29092:29092"
+      - "29093:29093"
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092"]
+      interval: 10s
+      timeout: 10s
+      retries: 15
+      start_period: 30s
+
+  schema-registry:
+    image: confluentinc/cp-schema-registry:7.6.1
+    container_name: ekadai-schema-registry
+    restart: unless-stopped
+    depends_on:
+      kafka:
+        condition: service_healthy
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:9092
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+      # §41 — BACKWARD compatibility by default for every subject this registry creates.
+      SCHEMA_REGISTRY_SCHEMA_COMPATIBILITY_LEVEL: backward
+    ports:
+      - "8081:8081"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8081/subjects"]
+      interval: 10s
+      timeout: 10s
+      retries: 15
+      start_period: 20s
+
+volumes:
+  kafka-data:

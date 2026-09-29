@@ -1,0 +1,71 @@
+table reconciliation_results
+	lineageTag: 7f5c06e8-b6e3-4feb-b082-9b374b2277f9
+
+	column backfill_id
+		dataType: string
+		lineageTag: 4b0ca535-ec4f-4cad-b1d2-7817864b5e8a
+		summarizeBy: none
+		sourceColumn: backfill_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column checked_at
+		dataType: dateTime
+		lineageTag: 2bec1460-4da9-4150-93c7-5c7b7fe1e75b
+		summarizeBy: none
+		sourceColumn: checked_at
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column check_name
+		dataType: string
+		lineageTag: c63b1d8e-d1b3-4b04-b7ee-7d58286db9da
+		summarizeBy: none
+		sourceColumn: check_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column expected
+		dataType: int64
+		lineageTag: 7f04f1a6-12f2-4099-996e-fda46f66ffa6
+		summarizeBy: sum
+		sourceColumn: expected
+
+		annotation SummarizationSetBy = Automatic
+
+	column actual
+		dataType: int64
+		lineageTag: 0e162213-e4b4-4fac-9ca3-8ee15762bbf5
+		summarizeBy: sum
+		sourceColumn: actual
+
+		annotation SummarizationSetBy = Automatic
+
+	column passed
+		dataType: boolean
+		lineageTag: ed0ecde8-6d77-4016-a3c1-5ed09a4e9fdb
+		summarizeBy: none
+		sourceColumn: passed
+
+		annotation SummarizationSetBy = Automatic
+
+	column detail
+		dataType: string
+		lineageTag: 1179f75b-0913-4f67-9ac1-bfa64a650308
+		summarizeBy: none
+		sourceColumn: detail
+
+		annotation SummarizationSetBy = Automatic
+
+	partition reconciliation_results = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405617818071366.6.azuredatabricks.net", "/sql/1.0/warehouses/68d5a8cb07485e9a", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    Catalog = Source{[Name="ekadai_databricks"]}[Data],
+				    Schema = Catalog{[Name="ops"]}[Data],
+				    Data = Schema{[Name="reconciliation_results"]}[Data]
+				in
+				    Data
+

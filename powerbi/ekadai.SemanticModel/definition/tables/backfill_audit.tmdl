@@ -1,0 +1,178 @@
+table backfill_audit
+	lineageTag: 31f01ac8-cae0-4e45-b4d2-ef3b8f25eaba
+
+	column backfill_id
+		dataType: string
+		lineageTag: 053ffb52-b6fd-4c0f-b86c-f6e7aced3352
+		summarizeBy: none
+		sourceColumn: backfill_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column supersedes_backfill_id
+		dataType: string
+		lineageTag: 9c6fca1e-e9b6-4aa4-afcf-6f0b68e5df19
+		summarizeBy: none
+		sourceColumn: supersedes_backfill_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column requested_by
+		dataType: string
+		lineageTag: 85dee3fe-adc9-4252-9227-e212ecce5d89
+		summarizeBy: none
+		sourceColumn: requested_by
+
+		annotation SummarizationSetBy = Automatic
+
+	column reason
+		dataType: string
+		lineageTag: 2d0cc01d-b40e-463f-be21-5aa0ce90803c
+		summarizeBy: none
+		sourceColumn: reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_start
+		dataType: dateTime
+		lineageTag: 623a2143-45d1-41f3-b9d6-98772e947b53
+		summarizeBy: none
+		sourceColumn: source_start
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_end
+		dataType: dateTime
+		lineageTag: 24fbdc1c-432c-43d3-89c7-88e6eed8da9a
+		summarizeBy: none
+		sourceColumn: source_end
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column tables_refreshed
+		dataType: string
+		lineageTag: 95a3f3cb-603a-43d6-ad01-7c2d54bf8f2c
+		summarizeBy: none
+		sourceColumn: tables_refreshed
+
+		annotation SummarizationSetBy = Automatic
+
+	column pipeline_version
+		dataType: string
+		lineageTag: 669b495c-b656-4cdb-860f-03b5a72d47df
+		summarizeBy: none
+		sourceColumn: pipeline_version
+
+		annotation SummarizationSetBy = Automatic
+
+	column git_commit
+		dataType: string
+		lineageTag: 3f3a619d-3df6-42ba-b99b-4709ff26cf72
+		summarizeBy: none
+		sourceColumn: git_commit
+
+		annotation SummarizationSetBy = Automatic
+
+	column pipeline_update_id
+		dataType: string
+		lineageTag: 54f116c6-73d0-4f69-93c3-ea9242a16e6b
+		summarizeBy: none
+		sourceColumn: pipeline_update_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column started_at
+		dataType: dateTime
+		lineageTag: 602e3ac4-742a-44d6-adce-6580927fbabb
+		summarizeBy: none
+		sourceColumn: started_at
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column finished_at
+		dataType: dateTime
+		lineageTag: 1f6438fa-06b5-4289-a78c-40eb40bcfc5e
+		summarizeBy: none
+		sourceColumn: finished_at
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 6d99bb79-bcb2-4629-8f3f-9baea0cb3820
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column input_count
+		dataType: int64
+		lineageTag: 7a3fe5be-1ee4-41aa-978a-d69658b6a431
+		summarizeBy: sum
+		sourceColumn: input_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column output_count
+		dataType: int64
+		lineageTag: a16949a4-1f48-4e5f-bec5-02361936bd91
+		summarizeBy: sum
+		sourceColumn: output_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column rejected_count
+		dataType: int64
+		lineageTag: aabe28f7-f213-4499-98bd-a632530fcc45
+		summarizeBy: sum
+		sourceColumn: rejected_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column duplicate_count
+		dataType: int64
+		lineageTag: 67df320b-eea3-4ab2-9856-cb5245014438
+		summarizeBy: sum
+		sourceColumn: duplicate_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column missing_count
+		dataType: int64
+		lineageTag: 6846bab9-9c11-4b8d-9bbe-20bd089323ac
+		summarizeBy: sum
+		sourceColumn: missing_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column errors
+		dataType: string
+		lineageTag: 63fb9c03-f50d-45f2-a14b-3e9bf27d7f96
+		summarizeBy: none
+		sourceColumn: errors
+
+		annotation SummarizationSetBy = Automatic
+
+	column reconciliation_passed
+		dataType: boolean
+		lineageTag: bf23c32a-13a8-439d-87a6-d96c79ea2ce2
+		summarizeBy: none
+		sourceColumn: reconciliation_passed
+
+		annotation SummarizationSetBy = Automatic
+
+	partition backfill_audit = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405617818071366.6.azuredatabricks.net", "/sql/1.0/warehouses/68d5a8cb07485e9a", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    Catalog = Source{[Name="ekadai_databricks"]}[Data],
+				    Schema = Catalog{[Name="ops"]}[Data],
+				    Data = Schema{[Name="backfill_audit"]}[Data]
+				in
+				    Data
+

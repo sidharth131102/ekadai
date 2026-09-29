@@ -1,0 +1,59 @@
+table agg_product_attribution
+	lineageTag: 1b047c23-544a-4807-82f2-79ea6fe396b3
+
+	measure '7d View to Purchase %' = DIVIDE(SUM('agg_product_attribution'[converted_users]), SUM('agg_product_attribution'[viewing_users]))
+		formatString: 0.0%
+		lineageTag: 7a8c168b-3d3e-40d0-a645-fef5c498cafc
+
+	column product_id
+		dataType: string
+		lineageTag: 3d078a86-f6cd-488f-b93f-2b2df1aa6a6d
+		sourceColumn: product_id
+
+	column product_key
+		dataType: int64
+		lineageTag: d079e705-f846-464b-b288-48a7052c91be
+		summarizeBy: none
+		sourceColumn: product_key
+
+	column product_name
+		dataType: string
+		lineageTag: fe642c5f-9dbc-4a5a-8f86-a1666d69687e
+		sourceColumn: product_name
+
+	column viewing_users
+		dataType: int64
+		lineageTag: 87736935-8a71-40d5-9f80-db5e42331bf4
+		sourceColumn: viewing_users
+
+	column converted_users
+		dataType: int64
+		lineageTag: 0dddf784-65db-48a5-b937-0c685b3ca27d
+		sourceColumn: converted_users
+
+	column conversion_rate_7d
+		dataType: double
+		lineageTag: 28c92f09-8186-41ff-af81-ffb8f7ebdfe5
+		sourceColumn: conversion_rate_7d
+
+	column avg_conversion_seconds
+		dataType: double
+		lineageTag: 83faa475-2f27-4ace-9fa9-d38eb8c0867a
+		sourceColumn: avg_conversion_seconds
+
+	column median_conversion_seconds
+		dataType: double
+		lineageTag: 5fdfc464-ba91-41f5-8056-456e9a8d4ac9
+		sourceColumn: median_conversion_seconds
+
+	partition agg_product_attribution = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405617818071366.6.azuredatabricks.net", "/sql/1.0/warehouses/68d5a8cb07485e9a", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    Catalog = Source{[Name="ekadai_databricks"]}[Data],
+				    Schema = Catalog{[Name="gold"]}[Data],
+				    Data = Schema{[Name="agg_product_attribution"]}[Data]
+				in
+				    Data
+

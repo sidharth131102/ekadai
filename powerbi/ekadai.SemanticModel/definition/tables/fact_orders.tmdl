@@ -1,0 +1,158 @@
+table fact_orders
+	lineageTag: 5a72e050-be70-4512-9cf6-e6afd65ecdde
+
+	column order_key
+		dataType: int64
+		lineageTag: 58c479cb-1bbe-411f-91d3-246529426c75
+		summarizeBy: sum
+		sourceColumn: order_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: string
+		lineageTag: 85fab1dc-5b2e-4b43-ad12-995fefd18432
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column user_key
+		dataType: int64
+		lineageTag: 371a0b6b-5f1e-4d6c-aabe-0e9509520d87
+		summarizeBy: none
+		sourceColumn: user_key
+
+	column date_key
+		dataType: int64
+		lineageTag: 306792bc-b193-4b59-93c9-e372851ddfa6
+		summarizeBy: none
+		sourceColumn: date_key
+
+	column status
+		dataType: string
+		lineageTag: 2798657e-a5fa-412c-8007-ecc460eb191d
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_timestamp
+		dataType: dateTime
+		lineageTag: 2a81710b-352b-4101-ac94-cf2e31164ff9
+		summarizeBy: none
+		sourceColumn: created_timestamp
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column confirmed_timestamp
+		dataType: dateTime
+		lineageTag: 7df79c65-4a11-4363-a717-86f87bd394e9
+		summarizeBy: none
+		sourceColumn: confirmed_timestamp
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column cancelled_timestamp
+		dataType: dateTime
+		lineageTag: efb4063b-2194-45bf-84ea-8a072da1f8ee
+		summarizeBy: none
+		sourceColumn: cancelled_timestamp
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_amount
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 11d5077f-3de3-4a5e-be6f-f8ab59a4a1b8
+		summarizeBy: sum
+		sourceColumn: total_amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column currency
+		dataType: string
+		lineageTag: 791d4bac-c754-48f3-906b-b3b06610078b
+		summarizeBy: none
+		sourceColumn: currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column item_count
+		dataType: int64
+		lineageTag: 5ab19b9b-b23d-48f9-8399-ade21c4a192c
+		summarizeBy: sum
+		sourceColumn: item_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_quantity
+		dataType: int64
+		lineageTag: 51737662-2dd4-4861-9bb3-420a0766c182
+		summarizeBy: sum
+		sourceColumn: total_quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column shipping_address_line1
+		dataType: string
+		lineageTag: cdb94845-d865-498a-b8a9-5ac6010f54c3
+		summarizeBy: none
+		sourceColumn: shipping_address_line1
+
+		annotation SummarizationSetBy = Automatic
+
+	column shipping_address_line2
+		dataType: string
+		lineageTag: db81b5e7-be9b-4c09-bd06-c9890f8686be
+		summarizeBy: none
+		sourceColumn: shipping_address_line2
+
+		annotation SummarizationSetBy = Automatic
+
+	column shipping_city
+		dataType: string
+		lineageTag: 512f2780-3627-438c-b4e6-06e322335ca7
+		summarizeBy: none
+		sourceColumn: shipping_city
+
+		annotation SummarizationSetBy = Automatic
+
+	column shipping_state
+		dataType: string
+		lineageTag: 8ac99be2-7b08-4a48-a7c6-e6e48af0d142
+		summarizeBy: none
+		sourceColumn: shipping_state
+
+		annotation SummarizationSetBy = Automatic
+
+	column shipping_postal_code
+		dataType: string
+		lineageTag: fb5cf241-7292-4d5b-be0e-f0255511381d
+		summarizeBy: none
+		sourceColumn: shipping_postal_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column shipping_country
+		dataType: string
+		lineageTag: b4625a30-4814-444a-829f-4a8399d75c9e
+		summarizeBy: none
+		sourceColumn: shipping_country
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_orders = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405617818071366.6.azuredatabricks.net", "/sql/1.0/warehouses/68d5a8cb07485e9a", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    Catalog = Source{[Name="ekadai_databricks"]}[Data],
+				    Schema = Catalog{[Name="gold"]}[Data],
+				    Data = Schema{[Name="fact_orders"]}[Data]
+				in
+				    Data
+

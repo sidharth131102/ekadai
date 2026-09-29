@@ -1,0 +1,204 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "funnelv5",
+  "position": {
+    "x": 16,
+    "y": 140,
+    "z": 0,
+    "height": 560,
+    "width": 1248
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "agg_conversion_funnel"
+                    }
+                  },
+                  "Property": "Funnel 1 Product View"
+                }
+              },
+              "queryRef": "agg_conversion_funnel.Funnel 1 Product View",
+              "nativeQueryRef": "Product View",
+              "displayName": "Product View"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "agg_conversion_funnel"
+                    }
+                  },
+                  "Property": "Funnel 2 Add To Cart"
+                }
+              },
+              "queryRef": "agg_conversion_funnel.Funnel 2 Add To Cart",
+              "nativeQueryRef": "Add To Cart",
+              "displayName": "Add To Cart"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "agg_conversion_funnel"
+                    }
+                  },
+                  "Property": "Funnel 3 Checkout"
+                }
+              },
+              "queryRef": "agg_conversion_funnel.Funnel 3 Checkout",
+              "nativeQueryRef": "Checkout",
+              "displayName": "Checkout"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "agg_conversion_funnel"
+                    }
+                  },
+                  "Property": "Funnel 4 Successful Order"
+                }
+              },
+              "queryRef": "agg_conversion_funnel.Funnel 4 Successful Order",
+              "nativeQueryRef": "Successful Order",
+              "displayName": "Successful Order"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Sessions reaching each stage (view → cart → checkout → order)'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "5310b555955549bc2347",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "agg_conversion_funnel"
+              }
+            },
+            "Property": "Funnel 1 Product View"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "ce82e0b3c600e0a790be",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "agg_conversion_funnel"
+              }
+            },
+            "Property": "Funnel 2 Add To Cart"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "7a00b3613409e3811ecb",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "agg_conversion_funnel"
+              }
+            },
+            "Property": "Funnel 3 Checkout"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "bdbb0ff055b640cceb20",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "agg_conversion_funnel"
+              }
+            },
+            "Property": "Funnel 4 Successful Order"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

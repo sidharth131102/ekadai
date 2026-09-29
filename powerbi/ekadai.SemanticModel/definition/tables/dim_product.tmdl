@@ -1,0 +1,95 @@
+table dim_product
+	lineageTag: 6f0598e4-4ac9-4d98-b7c3-d14944902ba1
+
+	column product_key
+		dataType: int64
+		lineageTag: eb4e8aa5-1d28-4581-b2fd-69c202075d2c
+		summarizeBy: none
+		sourceColumn: product_key
+
+	column product_id
+		dataType: string
+		lineageTag: 5e9dd714-7853-40cb-bb85-75385bb8769d
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name
+		dataType: string
+		lineageTag: c7d3bf55-a27d-4e8e-a864-8d14c25014ce
+		summarizeBy: none
+		sourceColumn: product_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_key
+		dataType: int64
+		lineageTag: 3f1935c1-12eb-4282-a892-d93c5de1f68c
+		summarizeBy: sum
+		sourceColumn: category_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column brand
+		dataType: string
+		lineageTag: 77664a7b-85b3-4b38-98bc-03e0e9858a0f
+		summarizeBy: none
+		sourceColumn: brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column base_price
+		dataType: double
+		formatString: #,0.00
+		lineageTag: ce5b6709-fe04-4d50-91dc-bbe60cb749fd
+		summarizeBy: sum
+		sourceColumn: base_price
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_status
+		dataType: string
+		lineageTag: 295a2c99-0c2f-4f1f-96aa-95bf8c452827
+		summarizeBy: none
+		sourceColumn: product_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_from
+		dataType: dateTime
+		lineageTag: 2e74e2ea-bf42-4370-af12-b38bd3b3e692
+		summarizeBy: none
+		sourceColumn: valid_from
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_to
+		dataType: dateTime
+		lineageTag: ecf127d8-2a76-411f-bab0-0133c9a46bec
+		summarizeBy: none
+		sourceColumn: valid_to
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_current
+		dataType: boolean
+		lineageTag: b384c2d2-79a6-4dda-a91c-03f5fa7936c1
+		summarizeBy: none
+		sourceColumn: is_current
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_product = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405617818071366.6.azuredatabricks.net", "/sql/1.0/warehouses/68d5a8cb07485e9a", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    Catalog = Source{[Name="ekadai_databricks"]}[Data],
+				    Schema = Catalog{[Name="gold"]}[Data],
+				    Data = Schema{[Name="dim_product"]}[Data]
+				in
+				    Data
+

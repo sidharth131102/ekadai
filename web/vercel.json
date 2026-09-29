@@ -1,0 +1,4 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [{ "source": "/((?!assets/|.*\\.(?:jpg|jpeg|png|svg|ico|webp|woff2?)$).*)", "destination": "/index.html" }]
+}

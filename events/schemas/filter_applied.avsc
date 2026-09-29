@@ -1,0 +1,162 @@
+{
+  "type": "record",
+  "name": "FilterApplied",
+  "namespace": "ekadai.events.product",
+  "fields": [
+    {
+      "name": "event_id",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "event_type",
+      "type": "string"
+    },
+    {
+      "name": "schema_version",
+      "type": "int"
+    },
+    {
+      "name": "event_timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
+      "name": "producer",
+      "type": "string"
+    },
+    {
+      "name": "context",
+      "type": {
+        "type": "record",
+        "name": "EventContext",
+        "namespace": "ekadai.events.common",
+        "fields": [
+          {
+            "name": "user_id",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "session_id",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "device",
+      "type": {
+        "type": "record",
+        "name": "DeviceInfo",
+        "namespace": "ekadai.events.common",
+        "fields": [
+          {
+            "name": "device_type",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "operating_system",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "browser",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "payload",
+      "type": {
+        "type": "record",
+        "name": "FilterAppliedPayload",
+        "namespace": "ekadai.events.product",
+        "fields": [
+          {
+            "name": "filters",
+            "type": {
+              "type": "array",
+              "items": {
+                "type": "record",
+                "name": "FilterEntry",
+                "namespace": "ekadai.events.product",
+                "fields": [
+                  {
+                    "name": "filter_type",
+                    "type": "string",
+                    "doc": "brand | category | price | rating | availability"
+                  },
+                  {
+                    "name": "filter_value_string",
+                    "type": [
+                      "null",
+                      "string"
+                    ],
+                    "default": null
+                  },
+                  {
+                    "name": "filter_value_min",
+                    "type": [
+                      "null",
+                      "double"
+                    ],
+                    "default": null
+                  },
+                  {
+                    "name": "filter_value_max",
+                    "type": [
+                      "null",
+                      "double"
+                    ],
+                    "default": null
+                  },
+                  {
+                    "name": "filter_value_boolean",
+                    "type": [
+                      "null",
+                      "boolean"
+                    ],
+                    "default": null
+                  },
+                  {
+                    "name": "category_id",
+                    "type": [
+                      "null",
+                      "string"
+                    ],
+                    "default": null
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "doc": "Phase 3b (client-emitted). One event may carry multiple filters."
+}

@@ -1,0 +1,236 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "opsrecoveryv1",
+  "position": {
+    "x": 16,
+    "y": 358,
+    "z": 0,
+    "height": 346,
+    "width": 1248
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "reconciliation_results"
+                    }
+                  },
+                  "Property": "backfill_id"
+                }
+              },
+              "queryRef": "reconciliation_results.backfill_id",
+              "nativeQueryRef": "backfill_id"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "reconciliation_results"
+                    }
+                  },
+                  "Property": "check_name"
+                }
+              },
+              "queryRef": "reconciliation_results.check_name",
+              "nativeQueryRef": "check_name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "reconciliation_results"
+                    }
+                  },
+                  "Property": "expected"
+                }
+              },
+              "queryRef": "reconciliation_results.expected",
+              "nativeQueryRef": "expected"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "reconciliation_results"
+                    }
+                  },
+                  "Property": "actual"
+                }
+              },
+              "queryRef": "reconciliation_results.actual",
+              "nativeQueryRef": "actual"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "reconciliation_results"
+                    }
+                  },
+                  "Property": "passed"
+                }
+              },
+              "queryRef": "reconciliation_results.passed",
+              "nativeQueryRef": "passed"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "reconciliation_results"
+                    }
+                  },
+                  "Property": "checked_at"
+                }
+              },
+              "queryRef": "reconciliation_results.checked_at",
+              "nativeQueryRef": "checked_at"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Reconciliation checks'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "75e5bb9d408d6c056d71",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "reconciliation_results"
+              }
+            },
+            "Property": "backfill_id"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "90fff3e002ec00762816",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "reconciliation_results"
+              }
+            },
+            "Property": "check_name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "56282dcc2b045a8d3027",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "reconciliation_results"
+              }
+            },
+            "Property": "expected"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "2b599819b39b30a25734",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "reconciliation_results"
+              }
+            },
+            "Property": "actual"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "967e15f2a14496517280",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "reconciliation_results"
+              }
+            },
+            "Property": "passed"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "89e4dc5c337ad64724be",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "reconciliation_results"
+              }
+            },
+            "Property": "checked_at"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

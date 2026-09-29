@@ -1,0 +1,284 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "productsv0",
+  "position": {
+    "x": 16,
+    "y": 16,
+    "z": 0,
+    "height": 420,
+    "width": 780
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_product"
+                    }
+                  },
+                  "Property": "product_name"
+                }
+              },
+              "queryRef": "dim_product.product_name",
+              "nativeQueryRef": "product_name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_product"
+                    }
+                  },
+                  "Property": "brand"
+                }
+              },
+              "queryRef": "dim_product.brand",
+              "nativeQueryRef": "brand"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "agg_product_performance"
+                    }
+                  },
+                  "Property": "Product Views"
+                }
+              },
+              "queryRef": "agg_product_performance.Product Views",
+              "nativeQueryRef": "Product Views"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "agg_product_performance"
+                    }
+                  },
+                  "Property": "Unique Viewers"
+                }
+              },
+              "queryRef": "agg_product_performance.Unique Viewers",
+              "nativeQueryRef": "Unique Viewers"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "agg_product_performance"
+                    }
+                  },
+                  "Property": "Cart Additions"
+                }
+              },
+              "queryRef": "agg_product_performance.Cart Additions",
+              "nativeQueryRef": "Cart Additions"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "agg_product_performance"
+                    }
+                  },
+                  "Property": "Units Sold"
+                }
+              },
+              "queryRef": "agg_product_performance.Units Sold",
+              "nativeQueryRef": "Units Sold"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "agg_product_performance"
+                    }
+                  },
+                  "Property": "Product Net Revenue"
+                }
+              },
+              "queryRef": "agg_product_performance.Product Net Revenue",
+              "nativeQueryRef": "Product Net Revenue"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Product performance'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "075df2c9d50ea406a301",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_product"
+              }
+            },
+            "Property": "product_name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "006c1d6211ba00e0cd55",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_product"
+              }
+            },
+            "Property": "brand"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "baa593f11d01be08455c",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "agg_product_performance"
+              }
+            },
+            "Property": "Product Views"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "1247bc229b3ca52661e1",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "agg_product_performance"
+              }
+            },
+            "Property": "Unique Viewers"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "b9495a7202ed5880b29e",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "agg_product_performance"
+              }
+            },
+            "Property": "Cart Additions"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "40e4b45c86017b14637d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "agg_product_performance"
+              }
+            },
+            "Property": "Units Sold"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "9f88edbc507837880ea4",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "agg_product_performance"
+              }
+            },
+            "Property": "Product Net Revenue"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

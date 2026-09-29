@@ -1,0 +1,48 @@
+# Public API on ekadai-vm: FastAPI behind Caddy (automatic Let's Encrypt HTTPS for the VM's
+# Azure DNS name). The API joins the Kafka stack's network, so events go to kafka:9092 and
+# schemas to schema-registry:8081 without leaving the VM.
+#
+# Secrets live only in ./api.env on the VM (chmod 600, never committed):
+#   DATABASE_URL=<Supabase session pooler URL>   JWT_SECRET_KEY=<random>
+#   CORS_ORIGINS=https://<vercel domain>,http://localhost:5173
+services:
+  api:
+    build: ./src
+    image: ekadai-api:latest
+    container_name: ekadai-api
+    restart: unless-stopped
+    env_file:
+      - ./api.env
+    environment:
+      EVENT_TRANSPORT: kafka
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      DEFAULT_CURRENCY: INR
+    networks:
+      - default
+      - kafka-stack
+    mem_limit: 768m
+
+  caddy:
+    image: caddy:2
+    container_name: ekadai-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - api
+
+volumes:
+  caddy-data:
+  caddy-config:
+
+networks:
+  default:
+  kafka-stack:
+    external: true
+    name: vm-stack_default

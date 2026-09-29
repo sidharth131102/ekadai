@@ -1,0 +1,70 @@
+table dim_category
+	lineageTag: a70be120-8173-4c98-9386-4e5a7b56d19c
+
+	column category_key
+		dataType: int64
+		lineageTag: 37a44d86-278b-4597-93ee-5bf39b942339
+		summarizeBy: none
+		sourceColumn: category_key
+
+	column category_id
+		dataType: string
+		lineageTag: a3dea3d2-e706-4b65-ada3-88f37a0c92db
+		summarizeBy: none
+		sourceColumn: category_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_name
+		dataType: string
+		lineageTag: 875e27aa-6ee1-4683-8b7a-679dabc7b5ea
+		summarizeBy: none
+		sourceColumn: category_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_status
+		dataType: string
+		lineageTag: be254f23-f192-42f5-beda-051ad663d29b
+		summarizeBy: none
+		sourceColumn: category_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_from
+		dataType: dateTime
+		lineageTag: eb02c2a8-bbfd-4f57-bf10-4dfcd6f186da
+		summarizeBy: none
+		sourceColumn: valid_from
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_to
+		dataType: dateTime
+		lineageTag: 8af53f06-8ceb-4b23-9b51-0f232c4972a4
+		summarizeBy: none
+		sourceColumn: valid_to
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_current
+		dataType: boolean
+		lineageTag: f55d5eb2-740a-45a0-b40b-378c0cdf865e
+		summarizeBy: none
+		sourceColumn: is_current
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_category = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405617818071366.6.azuredatabricks.net", "/sql/1.0/warehouses/68d5a8cb07485e9a", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    Catalog = Source{[Name="ekadai_databricks"]}[Data],
+				    Schema = Catalog{[Name="gold"]}[Data],
+				    Data = Schema{[Name="dim_category"]}[Data]
+				in
+				    Data
+

@@ -1,0 +1,93 @@
+relationship 48dc746c-3da1-4fd0-815e-cc6ecaed0424
+	fromColumn: fact_events.user_key
+	toColumn: dim_user.user_key
+
+relationship c1023bed-3bf1-40b2-8758-ba32703fd8df
+	fromColumn: fact_events.product_key
+	toColumn: dim_product.product_key
+
+relationship 4c90329f-46ee-4077-a2af-4d0ec1b9f257
+	fromColumn: fact_events.category_key
+	toColumn: dim_category.category_key
+
+relationship 4bbf598d-453d-4856-878e-9f53c48af5a7
+	fromColumn: fact_events.device_key
+	toColumn: dim_device.device_key
+
+relationship 6777373e-ef07-4c8e-b0bb-030d7c3b1c80
+	fromColumn: fact_events.date_key
+	toColumn: dim_date.date_key
+
+relationship 1ad858cc-0689-4480-acb9-a46069791b61
+	fromColumn: fact_sessions.user_key
+	toColumn: dim_user.user_key
+
+relationship 2fb0ef37-50f9-4402-bade-2b27ffeac9fc
+	fromColumn: fact_sessions.device_key
+	toColumn: dim_device.device_key
+
+relationship b8db7bb8-9e77-4daa-9752-850028b6c677
+	fromColumn: fact_sessions.date_key
+	toColumn: dim_date.date_key
+
+relationship 743de979-34e6-418b-ac37-b28c1aa2267a
+	fromColumn: fact_orders.user_key
+	toColumn: dim_user.user_key
+
+relationship 39192155-0304-4cb8-9109-93320db753ed
+	fromColumn: fact_orders.date_key
+	toColumn: dim_date.date_key
+
+relationship c2bb419e-46e0-4bf2-8f73-62002aa5a286
+	fromColumn: fact_order_items.product_key
+	toColumn: dim_product.product_key
+
+relationship 78eb9f5d-f5df-481e-8a94-8469d15bcf16
+	fromColumn: fact_order_items.user_key
+	toColumn: dim_user.user_key
+
+relationship 9e529a02-1b73-477b-8376-3c1ca40c81de
+	fromColumn: fact_order_items.date_key
+	toColumn: dim_date.date_key
+
+relationship 4a5b6b57-fa98-4708-be3e-d55543c58fdd
+	fromColumn: agg_user_activity.user_key
+	toColumn: dim_user.user_key
+
+relationship 96b251c5-7d00-4f05-ab9b-5d9270bf899f
+	fromColumn: agg_user_activity.date_key
+	toColumn: dim_date.date_key
+
+relationship 8a9cac2c-546a-42ea-be59-45f6326b13b0
+	fromColumn: agg_conversion_funnel.date_key
+	toColumn: dim_date.date_key
+
+relationship 2e6de2e7-d406-4017-b07a-87cdf05b06ab
+	fromColumn: agg_product_performance.product_key
+	toColumn: dim_product.product_key
+
+relationship 9faa873b-2f9e-4a72-b64d-4a936186fa9b
+	fromColumn: agg_product_performance.category_key
+	toColumn: dim_category.category_key
+
+relationship 81d6270b-5cf0-4cc3-b9c5-85396742a257
+	fromColumn: agg_product_performance.date_key
+	toColumn: dim_date.date_key
+
+relationship 74594891-4ae8-42ba-8c24-3a39bb39da37
+	fromColumn: agg_daily_revenue.date_key
+	toColumn: dim_date.date_key
+
+relationship 9489e47b-ffe2-4f60-8515-03a6b12c45d7
+	fromColumn: agg_order_metrics.date_key
+	toColumn: dim_date.date_key
+
+relationship c8d4d6a4-e8d6-4b4c-aea8-5269e25e22ac
+	fromColumn: agg_product_attribution.product_key
+	toColumn: dim_product.product_key
+
+relationship c3ad1b97-fd2a-4f78-a8fc-0703788cfb63
+	isActive: false
+	fromColumn: dim_product.category_key
+	toColumn: dim_category.category_key
+

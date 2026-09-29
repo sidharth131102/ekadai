@@ -1,0 +1,35 @@
+table dim_device
+	lineageTag: 44fae95b-bc6e-4358-ad64-7c408146af46
+
+	column device_key
+		dataType: int64
+		lineageTag: 3c6f0f5b-2d1c-4825-8510-f1a5d1059516
+		summarizeBy: none
+		sourceColumn: device_key
+
+	column device_type
+		dataType: string
+		lineageTag: 8d899627-69f7-4947-81ea-1b6520f435ab
+		sourceColumn: device_type
+
+	column operating_system
+		dataType: string
+		lineageTag: 1da88fde-aa2c-4cab-8ae7-8255cbb9044f
+		sourceColumn: operating_system
+
+	column browser
+		dataType: string
+		lineageTag: c0f9f1c5-f9d2-4cf2-abed-6ce6151e1f54
+		sourceColumn: browser
+
+	partition dim_device = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405617818071366.6.azuredatabricks.net", "/sql/1.0/warehouses/68d5a8cb07485e9a", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    Catalog = Source{[Name="ekadai_databricks"]}[Data],
+				    Schema = Catalog{[Name="gold"]}[Data],
+				    Data = Schema{[Name="dim_device"]}[Data]
+				in
+				    Data
+

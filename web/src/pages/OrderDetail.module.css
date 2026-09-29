@@ -1,0 +1,131 @@
+.page {
+  padding: var(--sp-6) 0 var(--sp-9);
+  max-width: 800px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-ink-muted);
+  margin-bottom: var(--sp-5);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.headRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--sp-6);
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+}
+
+.heading {
+  font-size: var(--fs-2xl);
+}
+
+.timeline {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--sp-7);
+}
+
+.timelineStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+  flex: 1;
+  position: relative;
+}
+
+.timelineDot {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-sunken);
+  color: var(--color-ink-faint);
+  z-index: 1;
+}
+
+.timelineDotActive {
+  background: var(--color-success);
+  color: var(--color-accent-ink);
+}
+
+.timelineDotDanger {
+  background: var(--color-danger);
+  color: var(--color-accent-ink);
+}
+
+.timelineLine {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  right: -50%;
+  height: 2px;
+  background: var(--color-border);
+  z-index: 0;
+}
+
+.timelineLabel {
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-ink-muted);
+  text-align: center;
+}
+
+.timelineTime {
+  font-size: var(--fs-2xs);
+  color: var(--color-ink-faint);
+}
+
+.card {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+  margin-bottom: var(--sp-5);
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  margin-bottom: var(--sp-4);
+}
+
+.itemRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--fs-sm);
+}
+
+.itemRow:last-child {
+  border-bottom: none;
+}
+
+.totalsRow {
+  display: flex;
+  justify-content: space-between;
+  padding-top: var(--sp-3);
+  font-weight: 700;
+}
+
+.addressText {
+  font-size: var(--fs-sm);
+  color: var(--color-ink-muted);
+  line-height: 1.6;
+}

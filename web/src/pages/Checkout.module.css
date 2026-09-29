@@ -1,0 +1,162 @@
+.page {
+  padding: var(--sp-6) 0 var(--sp-9);
+  max-width: 720px;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-7);
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--color-ink-faint);
+}
+
+.stepActive {
+  color: var(--color-accent);
+}
+
+.stepDone {
+  color: var(--color-success);
+}
+
+.stepDot {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+
+.stepLine {
+  width: 40px;
+  height: 1.5px;
+  background: var(--color-border);
+}
+
+.card {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-6);
+}
+
+.sectionTitle {
+  font-size: var(--fs-xl);
+  margin-bottom: var(--sp-5);
+}
+
+.addressList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-5);
+}
+
+.addressCard {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  padding: var(--sp-4);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: left;
+  background: var(--color-bg);
+}
+
+.addressCardSelected {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.addressRadio {
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border-strong);
+  margin-top: 3px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addressLines {
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+}
+
+.newAddressForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-5);
+}
+
+.newAddressForm > :first-child {
+  grid-column: 1 / -1;
+}
+
+.summaryRows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-5);
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-sm);
+  color: var(--color-ink-muted);
+}
+
+.summaryTotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.itemsPreview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-5);
+  font-size: var(--fs-sm);
+  color: var(--color-ink-muted);
+}
+
+.actions {
+  display: flex;
+  gap: var(--sp-3);
+  justify-content: flex-end;
+}
+
+.successWrap {
+  text-align: center;
+  padding: var(--sp-7) var(--sp-4);
+}
+
+.successTitle {
+  font-size: var(--fs-2xl);
+  margin: var(--sp-5) 0 var(--sp-2);
+}
+
+.successCopy {
+  color: var(--color-ink-muted);
+  margin-bottom: var(--sp-6);
+}

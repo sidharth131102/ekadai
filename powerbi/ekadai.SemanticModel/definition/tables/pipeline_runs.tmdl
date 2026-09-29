@@ -1,0 +1,96 @@
+table pipeline_runs
+	lineageTag: 97c7ebe7-06e3-461b-81bb-a2428e483bb6
+
+	column update_id
+		dataType: string
+		lineageTag: f1082763-d121-4e7a-96e4-2d4709b27a1c
+		summarizeBy: none
+		sourceColumn: update_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column started_at
+		dataType: dateTime
+		lineageTag: 86ecd664-d3c0-4885-838c-464a4bb7574f
+		summarizeBy: none
+		sourceColumn: started_at
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_event_at
+		dataType: dateTime
+		lineageTag: 039462b4-5fd9-4850-a3e8-76f6bee70869
+		summarizeBy: none
+		sourceColumn: last_event_at
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 7be9863d-f189-417f-afd8-1f22c738c089
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column cause
+		dataType: string
+		lineageTag: 5806c84f-db24-4c3f-82cb-b75e9dbc0345
+		summarizeBy: none
+		sourceColumn: cause
+
+		annotation SummarizationSetBy = Automatic
+
+	column full_refresh
+		dataType: boolean
+		lineageTag: 8c5b2f64-6305-4b4f-af52-93f66ed61c06
+		summarizeBy: none
+		sourceColumn: full_refresh
+
+		annotation SummarizationSetBy = Automatic
+
+	column duration_seconds
+		dataType: int64
+		lineageTag: 6cff4451-4f13-4619-8f5e-69d4842bf137
+		summarizeBy: sum
+		sourceColumn: duration_seconds
+
+		annotation SummarizationSetBy = Automatic
+
+	column error_events
+		dataType: int64
+		lineageTag: a326a2b4-3abe-4988-b83e-c7b3aec40b0a
+		summarizeBy: sum
+		sourceColumn: error_events
+
+		annotation SummarizationSetBy = Automatic
+
+	column failed_flow_events
+		dataType: int64
+		lineageTag: 2ca32ef4-327a-4087-a3fa-16389b894480
+		summarizeBy: sum
+		sourceColumn: failed_flow_events
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_error
+		dataType: string
+		lineageTag: 0bf52eaf-2290-4afb-ac75-cae2184f1586
+		summarizeBy: none
+		sourceColumn: last_error
+
+		annotation SummarizationSetBy = Automatic
+
+	partition pipeline_runs = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405617818071366.6.azuredatabricks.net", "/sql/1.0/warehouses/68d5a8cb07485e9a", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    Catalog = Source{[Name="ekadai_databricks"]}[Data],
+				    Schema = Catalog{[Name="ops"]}[Data],
+				    Data = Schema{[Name="pipeline_runs"]}[Data]
+				in
+				    Data
+

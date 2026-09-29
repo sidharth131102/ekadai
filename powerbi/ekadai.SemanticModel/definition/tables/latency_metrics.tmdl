@@ -1,0 +1,79 @@
+table latency_metrics
+	lineageTag: 3a3e23ce-a593-43df-b8e7-5eb407ec50c7
+
+	column hour
+		dataType: dateTime
+		lineageTag: 33007cb0-ccc5-44e9-9441-2feb9fa25404
+		summarizeBy: none
+		sourceColumn: hour
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column events
+		dataType: int64
+		lineageTag: 3edb846f-e0ca-4ee0-94c5-b4752fac9a81
+		summarizeBy: sum
+		sourceColumn: events
+
+		annotation SummarizationSetBy = Automatic
+
+	column ingestion_p50_s
+		dataType: double
+		lineageTag: 24dce1ba-1eaa-4fe4-b0b9-05c4d5a1a04f
+		summarizeBy: sum
+		sourceColumn: ingestion_p50_s
+
+		annotation SummarizationSetBy = Automatic
+
+	column ingestion_p95_s
+		dataType: double
+		lineageTag: 72078e41-62b5-4ad9-b5ec-5931bb88dea8
+		summarizeBy: sum
+		sourceColumn: ingestion_p95_s
+
+		annotation SummarizationSetBy = Automatic
+
+	column processing_p50_s
+		dataType: double
+		lineageTag: 292cf670-d4ed-46b1-b39e-b73615ff7b1a
+		summarizeBy: sum
+		sourceColumn: processing_p50_s
+
+		annotation SummarizationSetBy = Automatic
+
+	column processing_p95_s
+		dataType: double
+		lineageTag: 959aa5e0-794d-460c-9ef1-4466da43ed0f
+		summarizeBy: sum
+		sourceColumn: processing_p95_s
+
+		annotation SummarizationSetBy = Automatic
+
+	column end_to_end_p50_s
+		dataType: double
+		lineageTag: b04e5b88-36bb-4247-bf3d-c2021ade1640
+		summarizeBy: sum
+		sourceColumn: end_to_end_p50_s
+
+		annotation SummarizationSetBy = Automatic
+
+	column end_to_end_p95_s
+		dataType: double
+		lineageTag: ecc919ed-7b45-406c-aedd-23acefc167bd
+		summarizeBy: sum
+		sourceColumn: end_to_end_p95_s
+
+		annotation SummarizationSetBy = Automatic
+
+	partition latency_metrics = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405617818071366.6.azuredatabricks.net", "/sql/1.0/warehouses/68d5a8cb07485e9a", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    Catalog = Source{[Name="ekadai_databricks"]}[Data],
+				    Schema = Catalog{[Name="ops"]}[Data],
+				    Data = Schema{[Name="latency_metrics"]}[Data]
+				in
+				    Data
+

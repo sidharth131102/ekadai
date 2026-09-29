@@ -1,0 +1,37 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(36, 28, 21, 0.45);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-4);
+  z-index: 200;
+}
+
+.dialog {
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--sp-6);
+  max-width: 420px;
+  width: 100%;
+}
+
+.title {
+  font-size: var(--fs-lg);
+  margin-bottom: var(--sp-2);
+}
+
+.body {
+  color: var(--color-ink-muted);
+  font-size: var(--fs-sm);
+  margin-bottom: var(--sp-5);
+}
+
+.actions {
+  display: flex;
+  gap: var(--sp-3);
+  justify-content: flex-end;
+}

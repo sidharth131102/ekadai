@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+# VM-only secrets (Airflow's Databricks token) — never committed
+azure/vm-stack/airflow/airflow.env
+azure/vm-stack/api/api.env
+# Power BI Desktop local state (cached data, per-user settings)
+powerbi/**/.pbi/localSettings.json
+powerbi/**/.pbi/cache.abf
+
+# Node (later phases)
+node_modules/
+dist/
+build/
+
+# Docker
+db/pgdata/
+
+# Databricks / Spark (later phases)
+.databricks/
+spark-warehouse/
+metastore_db/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+var/

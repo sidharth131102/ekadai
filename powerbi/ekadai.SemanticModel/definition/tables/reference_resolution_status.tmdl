@@ -1,0 +1,111 @@
+table reference_resolution_status
+	lineageTag: 85a490a9-119b-4a8c-86f7-45a844b05a8f
+
+	column reference_type
+		dataType: string
+		lineageTag: e573c9d5-67de-4b97-a74f-69729134a381
+		summarizeBy: none
+		sourceColumn: reference_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column references_needed
+		dataType: int64
+		lineageTag: 36cf74c1-6b1b-48ed-8aca-b099587ade03
+		summarizeBy: sum
+		sourceColumn: references_needed
+
+		annotation SummarizationSetBy = Automatic
+
+	column pending_backlog
+		dataType: int64
+		lineageTag: 530cc0c0-2cb8-4db4-b7c1-e950bf2365ef
+		summarizeBy: sum
+		sourceColumn: pending_backlog
+
+		annotation SummarizationSetBy = Automatic
+
+	column processing
+		dataType: int64
+		lineageTag: 559f7876-7c26-42d2-8f0f-1d9df8a6f84c
+		summarizeBy: sum
+		sourceColumn: processing
+
+		annotation SummarizationSetBy = Automatic
+
+	column resolved
+		dataType: int64
+		lineageTag: 2168ad9d-7199-4e8f-b471-880179dd825e
+		summarizeBy: sum
+		sourceColumn: resolved
+
+		annotation SummarizationSetBy = Automatic
+
+	column failed
+		dataType: int64
+		lineageTag: 0bbea3fc-b26a-4d5a-b270-4bc32c7630d0
+		summarizeBy: sum
+		sourceColumn: failed
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_retries
+		dataType: int64
+		lineageTag: 8e91952b-7e3a-4bf0-8586-9f26674b70da
+		summarizeBy: sum
+		sourceColumn: total_retries
+
+		annotation SummarizationSetBy = Automatic
+
+	column affected_events
+		dataType: int64
+		lineageTag: 4a5ffc49-0a67-4eb1-b0fa-bdcab01237cd
+		summarizeBy: sum
+		sourceColumn: affected_events
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_resolution_latency_s
+		dataType: double
+		lineageTag: 8d1a1a26-db52-4f04-8aec-bbbd0c5e8726
+		summarizeBy: sum
+		sourceColumn: avg_resolution_latency_s
+
+		annotation SummarizationSetBy = Automatic
+
+	column median_resolution_latency_s
+		dataType: double
+		lineageTag: 68549060-2341-4c96-b342-668bf44e3b5b
+		summarizeBy: sum
+		sourceColumn: median_resolution_latency_s
+
+		annotation SummarizationSetBy = Automatic
+
+	column oldest_unresolved_first_seen_at
+		dataType: dateTime
+		lineageTag: 50a94387-cadb-43c5-8e50-21f6c4c5d649
+		summarizeBy: none
+		sourceColumn: oldest_unresolved_first_seen_at
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column oldest_unresolved_age_s
+		dataType: int64
+		lineageTag: 9286a125-a11e-4bf3-a6c6-f2b72766ad90
+		summarizeBy: sum
+		sourceColumn: oldest_unresolved_age_s
+
+		annotation SummarizationSetBy = Automatic
+
+	partition reference_resolution_status = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405617818071366.6.azuredatabricks.net", "/sql/1.0/warehouses/68d5a8cb07485e9a", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    Catalog = Source{[Name="ekadai_databricks"]}[Data],
+				    Schema = Catalog{[Name="ops"]}[Data],
+				    Data = Schema{[Name="reference_resolution_status"]}[Data]
+				in
+				    Data
+

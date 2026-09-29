@@ -1,0 +1,105 @@
+table agg_daily_revenue
+	lineageTag: e0c66fce-1e23-4439-97bc-103395b68cb3
+
+	measure GMV = SUM('agg_daily_revenue'[gross_merchandise_value])
+		formatString: ₹#,0.00
+		lineageTag: cf7acafa-41a9-4aa6-86c9-1bbd899b9206
+
+	measure Discounts = SUM('agg_daily_revenue'[discount_amount])
+		formatString: ₹#,0.00
+		lineageTag: fed7de07-b41f-4423-88b3-d6f79a02c830
+
+	measure 'Net Sales' = SUM('agg_daily_revenue'[net_transaction_sales])
+		formatString: ₹#,0.00
+		lineageTag: 50c63910-3348-4c38-bcbc-1e51214b4906
+
+	measure 'Cancelled Value' = SUM('agg_daily_revenue'[cancelled_order_value])
+		formatString: ₹#,0.00
+		lineageTag: a998129f-2ae8-457e-9077-c4851495d869
+
+	measure 'Revenue After Cancellations' = SUM('agg_daily_revenue'[revenue_after_cancellations])
+		formatString: ₹#,0.00
+		lineageTag: d9033346-3edb-4788-bd92-8346dda0f2df
+
+	column date_key
+		dataType: int64
+		lineageTag: 0de21661-a7e4-4a21-b1c7-97129e66acaf
+		summarizeBy: none
+		sourceColumn: date_key
+
+	column currency
+		dataType: string
+		lineageTag: 0f32fd99-f1f4-4d4b-8a4c-8ccb562fce55
+		sourceColumn: currency
+
+	column order_count
+		dataType: int64
+		lineageTag: f9625c1c-7996-4abb-99d8-dc6a44a15754
+		sourceColumn: order_count
+
+	column units_sold
+		dataType: int64
+		lineageTag: eb44c0f2-1a2a-46b6-b1fc-59506aff7782
+		sourceColumn: units_sold
+
+	column gross_merchandise_value
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 48a75bb7-f496-4d3d-98c7-f070c06ee88c
+		summarizeBy: sum
+		sourceColumn: gross_merchandise_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column discount_amount
+		dataType: double
+		formatString: #,0.00
+		lineageTag: c546d618-1ed6-43be-9ae5-0b445261be79
+		summarizeBy: sum
+		sourceColumn: discount_amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column net_transaction_sales
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 378fff71-dfea-42cd-af2b-7ee14d1f8878
+		summarizeBy: sum
+		sourceColumn: net_transaction_sales
+
+		annotation SummarizationSetBy = Automatic
+
+	column cancelled_order_count
+		dataType: int64
+		lineageTag: 618a4545-a801-49aa-b669-a139c9cf5e4d
+		sourceColumn: cancelled_order_count
+
+	column cancelled_order_value
+		dataType: double
+		formatString: #,0.00
+		lineageTag: d32ef9d8-1063-44bc-a45a-83f93ec64dd5
+		summarizeBy: sum
+		sourceColumn: cancelled_order_value
+
+		annotation SummarizationSetBy = Automatic
+
+	column revenue_after_cancellations
+		dataType: double
+		formatString: #,0.00
+		lineageTag: a0d585eb-11ab-4b9d-a8b3-a19f474c5ef8
+		summarizeBy: sum
+		sourceColumn: revenue_after_cancellations
+
+		annotation SummarizationSetBy = Automatic
+
+	partition agg_daily_revenue = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405617818071366.6.azuredatabricks.net", "/sql/1.0/warehouses/68d5a8cb07485e9a", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    Catalog = Source{[Name="ekadai_databricks"]}[Data],
+				    Schema = Catalog{[Name="gold"]}[Data],
+				    Data = Schema{[Name="agg_daily_revenue"]}[Data]
+				in
+				    Data
+

@@ -1,0 +1,114 @@
+table fact_events
+	lineageTag: d128b670-0e7c-4a42-b305-3774b720c8d1
+
+	measure Events = COUNTROWS('fact_events')
+		formatString: #,0
+		lineageTag: e211c7ed-cf50-4bd6-a9af-d7273e00961e
+
+	column event_key
+		dataType: int64
+		lineageTag: 53c0496f-f3e0-4e8b-b457-e9cedfe2da98
+		summarizeBy: sum
+		sourceColumn: event_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_id
+		dataType: string
+		lineageTag: 55b83034-23d8-43b1-ad63-14c3744b6362
+		summarizeBy: none
+		sourceColumn: event_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_type
+		dataType: string
+		lineageTag: 4af04f24-b3b0-4443-be27-82f08f2210c2
+		summarizeBy: none
+		sourceColumn: event_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column schema_version
+		dataType: int64
+		lineageTag: e397fe86-30bb-4a87-b9b8-660506b2bbd7
+		summarizeBy: sum
+		sourceColumn: schema_version
+
+		annotation SummarizationSetBy = Automatic
+
+	column user_key
+		dataType: int64
+		lineageTag: ca37b27c-0a01-4d89-b7bd-c3f70ceb3289
+		summarizeBy: none
+		sourceColumn: user_key
+
+	column session_id
+		dataType: string
+		lineageTag: 46e28b90-c9a4-4e8b-9e7d-137c1ec65cc8
+		summarizeBy: none
+		sourceColumn: session_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_key
+		dataType: int64
+		lineageTag: efabb95e-0d1e-46d6-a0c0-c515bb317f24
+		summarizeBy: none
+		sourceColumn: product_key
+
+	column category_key
+		dataType: int64
+		lineageTag: 9326cc92-1555-4dd3-9210-a53a6a7519d4
+		summarizeBy: none
+		sourceColumn: category_key
+
+	column device_key
+		dataType: int64
+		lineageTag: 581ef5e3-040f-4e65-aff7-632ef3e19312
+		summarizeBy: none
+		sourceColumn: device_key
+
+	column date_key
+		dataType: int64
+		lineageTag: dfe14c18-3974-42c5-84c6-4c82c709ba74
+		summarizeBy: none
+		sourceColumn: date_key
+
+	column event_timestamp
+		dataType: dateTime
+		lineageTag: f0a589ae-76a8-40a6-8e6b-eab996ec8f70
+		summarizeBy: none
+		sourceColumn: event_timestamp
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column ingestion_timestamp
+		dataType: dateTime
+		lineageTag: d77e09d9-2e03-4e12-b349-b7d7f37333eb
+		summarizeBy: none
+		sourceColumn: ingestion_timestamp
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column source
+		dataType: string
+		lineageTag: 379fec4b-e07e-43ce-9577-2ddd0f865ed4
+		summarizeBy: none
+		sourceColumn: source
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_events = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405617818071366.6.azuredatabricks.net", "/sql/1.0/warehouses/68d5a8cb07485e9a", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    Catalog = Source{[Name="ekadai_databricks"]}[Data],
+				    Schema = Catalog{[Name="gold"]}[Data],
+				    Data = Schema{[Name="fact_events"]}[Data]
+				in
+				    Data
+

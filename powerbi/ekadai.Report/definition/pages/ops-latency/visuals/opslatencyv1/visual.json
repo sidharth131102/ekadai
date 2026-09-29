@@ -1,0 +1,143 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "opslatencyv1",
+  "position": {
+    "x": 16,
+    "y": 358,
+    "z": 0,
+    "width": 1248,
+    "height": 346
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "kafka_lag"
+                    }
+                  },
+                  "Property": "topic"
+                }
+              },
+              "queryRef": "kafka_lag.topic",
+              "nativeQueryRef": "topic"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "kafka_lag"
+                    }
+                  },
+                  "Property": "partition"
+                }
+              },
+              "queryRef": "kafka_lag.partition",
+              "nativeQueryRef": "partition"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "kafka_lag"
+                    }
+                  },
+                  "Property": "latest_offset"
+                }
+              },
+              "queryRef": "kafka_lag.latest_offset",
+              "nativeQueryRef": "latest_offset"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "kafka_lag"
+                    }
+                  },
+                  "Property": "bronze_max_offset"
+                }
+              },
+              "queryRef": "kafka_lag.bronze_max_offset",
+              "nativeQueryRef": "bronze_max_offset"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "kafka_lag"
+                    }
+                  },
+                  "Property": "lag_messages"
+                }
+              },
+              "queryRef": "kafka_lag.lag_messages",
+              "nativeQueryRef": "lag_messages"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "kafka_lag"
+                    }
+                  },
+                  "Property": "partition_share"
+                }
+              },
+              "queryRef": "kafka_lag.partition_share",
+              "nativeQueryRef": "partition_share"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "kafka_lag"
+                    }
+                  },
+                  "Property": "captured_at"
+                }
+              },
+              "queryRef": "kafka_lag.captured_at",
+              "nativeQueryRef": "captured_at"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Kafka lag per partition'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

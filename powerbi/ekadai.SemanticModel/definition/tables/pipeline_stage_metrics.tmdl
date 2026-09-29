@@ -1,0 +1,96 @@
+table pipeline_stage_metrics
+	lineageTag: c77caaa8-c241-4cd2-8cab-fcd4fccaf091
+
+	column stage
+		dataType: string
+		lineageTag: c6180e2d-5029-47af-9588-169c686bb9d8
+		summarizeBy: none
+		sourceColumn: stage
+
+		annotation SummarizationSetBy = Automatic
+
+	column flow_name
+		dataType: string
+		lineageTag: c760bb2a-121c-4de2-b7c1-e0bef9bf518f
+		summarizeBy: none
+		sourceColumn: flow_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column update_id
+		dataType: string
+		lineageTag: 809cce9a-4e98-40bd-8a64-1606e10a8a66
+		summarizeBy: none
+		sourceColumn: update_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_status
+		dataType: string
+		lineageTag: 940026f1-cefa-4833-960c-f3cd5917e766
+		summarizeBy: none
+		sourceColumn: last_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_success_at
+		dataType: dateTime
+		lineageTag: 35c40305-d99b-4a30-bd1c-d9c1118221c9
+		summarizeBy: none
+		sourceColumn: last_success_at
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column failed_batches
+		dataType: int64
+		lineageTag: a597b627-69c0-41c3-972e-a315de403dcd
+		summarizeBy: sum
+		sourceColumn: failed_batches
+
+		annotation SummarizationSetBy = Automatic
+
+	column batches
+		dataType: int64
+		lineageTag: de4afbc9-c6b7-4be2-b75b-5e6f9ef17d5d
+		summarizeBy: sum
+		sourceColumn: batches
+
+		annotation SummarizationSetBy = Automatic
+
+	column output_records
+		dataType: int64
+		lineageTag: 47fa474f-e737-4e44-90ff-9abfd3de0566
+		summarizeBy: sum
+		sourceColumn: output_records
+
+		annotation SummarizationSetBy = Automatic
+
+	column latest_backlog_bytes
+		dataType: int64
+		lineageTag: f26c4c7b-9392-4892-a743-c2e5dbfba669
+		summarizeBy: sum
+		sourceColumn: latest_backlog_bytes
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_event_at
+		dataType: dateTime
+		lineageTag: 10f497a3-ac8a-4c1e-ba10-60098479d644
+		summarizeBy: none
+		sourceColumn: last_event_at
+
+
+		annotation SummarizationSetBy = Automatic
+
+	partition pipeline_stage_metrics = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405617818071366.6.azuredatabricks.net", "/sql/1.0/warehouses/68d5a8cb07485e9a", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    Catalog = Source{[Name="ekadai_databricks"]}[Data],
+				    Schema = Catalog{[Name="ops"]}[Data],
+				    Data = Schema{[Name="pipeline_stage_metrics"]}[Data]
+				in
+				    Data
+

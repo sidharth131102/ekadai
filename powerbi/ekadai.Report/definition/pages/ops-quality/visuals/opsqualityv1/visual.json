@@ -1,0 +1,294 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "opsqualityv1",
+  "position": {
+    "x": 16.466607480862326,
+    "y": 327.95993232717467,
+    "z": 0,
+    "height": 375.98753747968982,
+    "width": 622.98664969262472
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "reference_resolution_status"
+                    }
+                  },
+                  "Property": "reference_type"
+                }
+              },
+              "queryRef": "reference_resolution_status.reference_type",
+              "nativeQueryRef": "reference_type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "reference_resolution_status"
+                    }
+                  },
+                  "Property": "references_needed"
+                }
+              },
+              "queryRef": "reference_resolution_status.references_needed",
+              "nativeQueryRef": "references_needed"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "reference_resolution_status"
+                    }
+                  },
+                  "Property": "pending_backlog"
+                }
+              },
+              "queryRef": "reference_resolution_status.pending_backlog",
+              "nativeQueryRef": "pending_backlog"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "reference_resolution_status"
+                    }
+                  },
+                  "Property": "resolved"
+                }
+              },
+              "queryRef": "reference_resolution_status.resolved",
+              "nativeQueryRef": "resolved"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "reference_resolution_status"
+                    }
+                  },
+                  "Property": "failed"
+                }
+              },
+              "queryRef": "reference_resolution_status.failed",
+              "nativeQueryRef": "failed"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "reference_resolution_status"
+                    }
+                  },
+                  "Property": "avg_resolution_latency_s"
+                }
+              },
+              "queryRef": "reference_resolution_status.avg_resolution_latency_s",
+              "nativeQueryRef": "avg_resolution_latency_s"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "reference_resolution_status"
+                    }
+                  },
+                  "Property": "oldest_unresolved_age_s"
+                }
+              },
+              "queryRef": "reference_resolution_status.oldest_unresolved_age_s",
+              "nativeQueryRef": "oldest_unresolved_age_s"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "reference_resolution_status"
+                  }
+                },
+                "Property": "pending_backlog"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Reference resolution'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "9ed5270c0dca315a0ea9",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "reference_resolution_status"
+              }
+            },
+            "Property": "reference_type"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "9956f3028d54b1a30dca",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "reference_resolution_status"
+              }
+            },
+            "Property": "references_needed"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "eab110b774cc0481b346",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "reference_resolution_status"
+              }
+            },
+            "Property": "pending_backlog"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "7783ffe41e2093765c52",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "reference_resolution_status"
+              }
+            },
+            "Property": "resolved"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "953485462b5a9366e4b0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "reference_resolution_status"
+              }
+            },
+            "Property": "failed"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "95a4bfcd73263ca43db0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "reference_resolution_status"
+              }
+            },
+            "Property": "avg_resolution_latency_s"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c3af15f85cc5c03eaa4a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "reference_resolution_status"
+              }
+            },
+            "Property": "oldest_unresolved_age_s"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "ekadai",
+  "dataColors": [
+    "#1F3A5F",
+    "#E07A5F",
+    "#3D9970",
+    "#F2CC8F",
+    "#81B29A",
+    "#6C757D",
+    "#B5838D",
+    "#264653"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#1B1B1B",
+  "tableAccent": "#1F3A5F"
+}

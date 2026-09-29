@@ -1,0 +1,106 @@
+services:
+  kafka:
+    image: apache/kafka:3.8.0
+    container_name: ekadai-kafka
+    restart: unless-stopped
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      CLUSTER_ID: 0GV8czVET2a9TOf_rCMxzQ
+      # Single host now — Kafka, Schema Registry, and Connect all share this compose network,
+      # so no host.docker.internal tricks are needed (those existed only to bridge Windows
+      # Docker Desktop's host/container split for local dev). PLAINTEXT_HOST stays for anything
+      # reaching in from outside this VM (verification from the dev machine, eventually
+      # Databricks) via the VM's public IP.
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093,PLAINTEXT_HOST://:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://20.102.92.77:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_LOG_RETENTION_HOURS: 168
+      # Phase 4 discovered the image's real default log.dirs is /tmp/kafka-logs, not this
+      # mount path — must be set explicitly or the volume is silently unused.
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+    ports:
+      - "29092:29092"
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092"]
+      interval: 10s
+      timeout: 10s
+      retries: 15
+      start_period: 30s
+
+  schema-registry:
+    image: confluentinc/cp-schema-registry:7.6.1
+    container_name: ekadai-schema-registry
+    restart: unless-stopped
+    depends_on:
+      kafka:
+        condition: service_healthy
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:9092
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+      SCHEMA_REGISTRY_SCHEMA_COMPATIBILITY_LEVEL: backward
+    ports:
+      - "8081:8081"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8081/subjects"]
+      interval: 10s
+      timeout: 10s
+      retries: 15
+      start_period: 20s
+
+  connect:
+    build:
+      context: .
+      dockerfile: debezium.Dockerfile
+    image: ekadai-debezium-connect
+    container_name: ekadai-debezium-connect
+    restart: unless-stopped
+    depends_on:
+      kafka:
+        condition: service_healthy
+      schema-registry:
+        condition: service_healthy
+    environment:
+      BOOTSTRAP_SERVERS: kafka:9092
+      GROUP_ID: ekadai-connect-cluster
+      CONFIG_STORAGE_TOPIC: connect-configs
+      OFFSET_STORAGE_TOPIC: connect-offsets
+      STATUS_STORAGE_TOPIC: connect-status
+      KEY_CONVERTER: io.confluent.connect.avro.AvroConverter
+      VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
+      CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      CONNECT_REST_ADVERTISED_HOST_NAME: localhost
+    ports:
+      - "8083:8083"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8083/ > /dev/null"]
+      interval: 10s
+      timeout: 10s
+      retries: 15
+      start_period: 30s
+
+volumes:
+  kafka-data:
+
+networks:
+  default:
+    # Compose's own network doesn't inherit the Docker daemon's global IPv6 settings — it needs
+    # enabling explicitly per-network. Debezium specifically needs this to reach Supabase's
+    # IPv6-only direct-connection endpoint from inside its own container.
+    enable_ipv6: true
+    ipam:
+      config:
+        # A distinct /64 from the daemon's default-bridge fixed-cidr-v6 (fd00:1234:5678::/64,
+        # set in /etc/docker/daemon.json) — reusing the same range causes a pool-overlap error.
+        - subnet: fd00:1234:5679::/64

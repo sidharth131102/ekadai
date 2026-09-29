@@ -1,0 +1,90 @@
+table dim_user
+	lineageTag: dd21fefe-d17b-46b7-9caa-1d81614d7e57
+
+	column user_key
+		dataType: int64
+		lineageTag: 4e532e26-ea7c-4b4a-b970-cd78840a37fd
+		summarizeBy: none
+		sourceColumn: user_key
+
+	column user_id
+		dataType: string
+		lineageTag: 964fc4dd-53c9-455f-afbd-f678656cf308
+		summarizeBy: none
+		sourceColumn: user_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column registration_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 358821d3-5242-48fb-a562-4f864cb117c3
+		summarizeBy: none
+		sourceColumn: registration_date
+
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column account_status
+		dataType: string
+		lineageTag: f0eb7751-46f7-4966-aa8f-8bdf2909b4e5
+		summarizeBy: none
+		sourceColumn: account_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 442a7777-e5cb-4526-beac-3f59554b09a2
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 46ccad7f-da45-48bc-9135-0545b4e1f07c
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_from
+		dataType: dateTime
+		lineageTag: 7e033b5f-f8a4-4c0e-b1b5-e4a41334052e
+		summarizeBy: none
+		sourceColumn: valid_from
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_to
+		dataType: dateTime
+		lineageTag: 61062949-b13d-4f28-bb1b-2f98dfa008f1
+		summarizeBy: none
+		sourceColumn: valid_to
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_current
+		dataType: boolean
+		lineageTag: 1551a240-bf18-42c2-bbee-cd41bc81fb29
+		summarizeBy: none
+		sourceColumn: is_current
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_user = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405617818071366.6.azuredatabricks.net", "/sql/1.0/warehouses/68d5a8cb07485e9a", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    Catalog = Source{[Name="ekadai_databricks"]}[Data],
+				    Schema = Catalog{[Name="gold"]}[Data],
+				    Data = Schema{[Name="dim_user"]}[Data]
+				in
+				    Data
+

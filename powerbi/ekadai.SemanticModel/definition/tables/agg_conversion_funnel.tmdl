@@ -1,0 +1,86 @@
+table agg_conversion_funnel
+	lineageTag: fbe3a532-70da-480e-817a-f6dd4af0a748
+
+	measure 'Funnel 1 Product View' = SUM('agg_conversion_funnel'[product_view_sessions])
+		formatString: #,0
+		lineageTag: d4f43f23-8aeb-4d24-b1dc-cc981571bccf
+
+	measure 'Funnel 2 Add To Cart' = SUM('agg_conversion_funnel'[add_to_cart_sessions])
+		formatString: #,0
+		lineageTag: 310f2f0e-b167-40ad-8c6d-19a7d3a733f3
+
+	measure 'Funnel 3 Checkout' = SUM('agg_conversion_funnel'[checkout_started_sessions])
+		formatString: #,0
+		lineageTag: 499011ae-16c2-4973-90f4-2dfc543bf419
+
+	measure 'Funnel 4 Successful Order' = SUM('agg_conversion_funnel'[successful_order_sessions])
+		formatString: #,0
+		lineageTag: 2576f512-4739-4426-b1ff-e8fe49e0fc96
+
+	measure 'View to Cart %' = DIVIDE([Funnel 2 Add To Cart], [Funnel 1 Product View])
+		formatString: 0.0%
+		lineageTag: 61084af3-96ea-4ad9-824b-abd8c9428766
+
+	measure 'Cart to Checkout %' = DIVIDE([Funnel 3 Checkout], [Funnel 2 Add To Cart])
+		formatString: 0.0%
+		lineageTag: 7b9fa89b-2cd1-49de-b25a-05a00902f629
+
+	measure 'Checkout to Order %' = DIVIDE([Funnel 4 Successful Order], [Funnel 3 Checkout])
+		formatString: 0.0%
+		lineageTag: 6149fed4-f730-4290-9464-718827020f57
+
+	measure 'Checkout Abandonment %' = DIVIDE(SUM('agg_conversion_funnel'[checkout_abandoned_sessions]), [Funnel 3 Checkout])
+		formatString: 0.0%
+		lineageTag: 8401ebf8-60bf-4a72-82c3-fbc40c342beb
+
+	measure 'Cancelled Order Sessions' = SUM('agg_conversion_funnel'[cancelled_order_sessions])
+		formatString: #,0
+		lineageTag: 9387e278-a4b4-42b9-b27f-f0dcc1366101
+
+	column date_key
+		dataType: int64
+		lineageTag: 71825d03-9329-4c6e-9db0-3442d4d2b5e9
+		summarizeBy: none
+		sourceColumn: date_key
+
+	column product_view_sessions
+		dataType: int64
+		lineageTag: f0cfdd28-6880-4095-91d4-8c847cbf4c78
+		sourceColumn: product_view_sessions
+
+	column add_to_cart_sessions
+		dataType: int64
+		lineageTag: e1cfb7d1-e016-4bea-8f8e-455e4d912b47
+		sourceColumn: add_to_cart_sessions
+
+	column checkout_started_sessions
+		dataType: int64
+		lineageTag: 8a04c1b6-5448-4d5e-928c-efbddfb965aa
+		sourceColumn: checkout_started_sessions
+
+	column successful_order_sessions
+		dataType: int64
+		lineageTag: c0b01ccd-e1ea-4a25-83d3-03aeb93f1546
+		sourceColumn: successful_order_sessions
+
+	column checkout_abandoned_sessions
+		dataType: int64
+		lineageTag: 0e83fd7f-ddff-409a-b7b6-d9bc6a2ab1ea
+		sourceColumn: checkout_abandoned_sessions
+
+	column cancelled_order_sessions
+		dataType: int64
+		lineageTag: 0b9afc9a-9998-4ce7-8437-d1f15dc98cb7
+		sourceColumn: cancelled_order_sessions
+
+	partition agg_conversion_funnel = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405617818071366.6.azuredatabricks.net", "/sql/1.0/warehouses/68d5a8cb07485e9a", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    Catalog = Source{[Name="ekadai_databricks"]}[Data],
+				    Schema = Catalog{[Name="gold"]}[Data],
+				    Data = Schema{[Name="agg_conversion_funnel"]}[Data]
+				in
+				    Data
+

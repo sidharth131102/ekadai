@@ -1,0 +1,87 @@
+table kafka_lag
+	lineageTag: a30c569d-ae9f-4a34-80b4-5c58a9b84f7b
+
+	column topic
+		dataType: string
+		lineageTag: 0667a689-98cb-4770-ab03-29a08f790495
+		summarizeBy: none
+		sourceColumn: topic
+
+		annotation SummarizationSetBy = Automatic
+
+	column partition
+		dataType: int64
+		lineageTag: 10e27485-cd50-436f-aa58-114f1da46255
+		summarizeBy: sum
+		sourceColumn: partition
+
+		annotation SummarizationSetBy = Automatic
+
+	column captured_at
+		dataType: dateTime
+		lineageTag: 4c6487da-b244-404d-8b83-0acfe6fa12b2
+		summarizeBy: none
+		sourceColumn: captured_at
+
+
+		annotation SummarizationSetBy = Automatic
+
+	column earliest_offset
+		dataType: int64
+		lineageTag: 67dffc27-ef0e-40fb-b667-5265f82b1fe9
+		summarizeBy: sum
+		sourceColumn: earliest_offset
+
+		annotation SummarizationSetBy = Automatic
+
+	column latest_offset
+		dataType: int64
+		lineageTag: d5b0543e-aa05-4ed3-8f4c-7c5407882670
+		summarizeBy: sum
+		sourceColumn: latest_offset
+
+		annotation SummarizationSetBy = Automatic
+
+	column bronze_max_offset
+		dataType: int64
+		lineageTag: 74ca4665-6435-45d9-8209-f21335dde050
+		summarizeBy: sum
+		sourceColumn: bronze_max_offset
+
+		annotation SummarizationSetBy = Automatic
+
+	column lag_messages
+		dataType: int64
+		lineageTag: 5b917025-e997-406c-8319-f286cabc012d
+		summarizeBy: sum
+		sourceColumn: lag_messages
+
+		annotation SummarizationSetBy = Automatic
+
+	column retained_messages
+		dataType: int64
+		lineageTag: 1484d1af-3c4e-4db4-9b38-e78aaa5c352b
+		summarizeBy: sum
+		sourceColumn: retained_messages
+
+		annotation SummarizationSetBy = Automatic
+
+	column partition_share
+		dataType: double
+		lineageTag: 726ef595-fc97-46ef-8236-4e26b4db1cc9
+		summarizeBy: sum
+		sourceColumn: partition_share
+
+		annotation SummarizationSetBy = Automatic
+
+	partition kafka_lag = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405617818071366.6.azuredatabricks.net", "/sql/1.0/warehouses/68d5a8cb07485e9a", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    Catalog = Source{[Name="ekadai_databricks"]}[Data],
+				    Schema = Catalog{[Name="ops"]}[Data],
+				    Data = Schema{[Name="kafka_lag"]}[Data]
+				in
+				    Data
+

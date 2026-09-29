@@ -1,0 +1,45 @@
+# Airflow on ekadai-vm, alongside the Kafka/Debezium stack (separate Compose project).
+# `airflow standalone` = webserver + scheduler + SQLite in one container — enough for a handful
+# of low-frequency DAGs, ~1 GB RAM.
+#
+# Secrets live only in ./airflow.env on the VM (chmod 600, never committed):
+#   AIRFLOW_CONN_DATABRICKS_DEFAULT={"conn_type":"databricks","host":"https://<workspace>","password":"<PAT>"}
+# Admin password: generated on first start —
+#   docker exec ekadai-airflow cat /opt/airflow/standalone_admin_password.txt
+services:
+  airflow:
+    build: .
+    image: ekadai-airflow:2.10.5
+    container_name: ekadai-airflow
+    command: standalone
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./airflow.env
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "false"
+      AIRFLOW__WEBSERVER__EXPOSE_CONFIG: "false"
+      EKADAI_SQL_WAREHOUSE_HTTP_PATH: /sql/1.0/warehouses/68d5a8cb07485e9a
+      EKADAI_PIPELINE_ID: 5d26a480-752f-41b6-9597-c2c8c97c2e1c
+      # Reached over the Kafka stack's own Docker network (below), by service name.
+      EKADAI_KAFKA_BOOTSTRAP: kafka:9092
+      EKADAI_CONNECT_URL: http://connect:8083
+    volumes:
+      - airflow-home:/opt/airflow
+      - ./dags:/opt/airflow/dags
+    networks:
+      - default
+      - kafka-stack
+    mem_limit: 2g
+
+volumes:
+  airflow-home:
+
+networks:
+  default:
+  # The Kafka/Schema Registry/Debezium Compose project in ~/vm-stack (project name vm-stack).
+  kafka-stack:
+    external: true
+    name: vm-stack_default

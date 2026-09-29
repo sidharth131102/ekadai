@@ -1,0 +1,221 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "opsqualityv2",
+  "position": {
+    "x": 686.10864503593029,
+    "y": 327.95993232717467,
+    "z": 0,
+    "height": 375.98753747968982,
+    "width": 459.6927921740733
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "late_replay_status"
+                    }
+                  },
+                  "Property": "replay_records"
+                }
+              },
+              "queryRef": "late_replay_status.replay_records",
+              "nativeQueryRef": "replay_records"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "late_replay_status"
+                    }
+                  },
+                  "Property": "replay_backlog"
+                }
+              },
+              "queryRef": "late_replay_status.replay_backlog",
+              "nativeQueryRef": "replay_backlog"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "late_replay_status"
+                    }
+                  },
+                  "Property": "replay_succeeded"
+                }
+              },
+              "queryRef": "late_replay_status.replay_succeeded",
+              "nativeQueryRef": "replay_succeeded"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "late_replay_status"
+                    }
+                  },
+                  "Property": "replay_failed"
+                }
+              },
+              "queryRef": "late_replay_status.replay_failed",
+              "nativeQueryRef": "replay_failed"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "late_replay_status"
+                    }
+                  },
+                  "Property": "avg_replay_latency_s"
+                }
+              },
+              "queryRef": "late_replay_status.avg_replay_latency_s",
+              "nativeQueryRef": "avg_replay_latency_s"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Late-data replay'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "fa3c76bde5938c0d0879",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "late_replay_status"
+              }
+            },
+            "Property": "replay_records"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "5dd12e41e20d2dc251e1",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "late_replay_status"
+              }
+            },
+            "Property": "replay_backlog"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "9829c9692c15c79e2047",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "late_replay_status"
+              }
+            },
+            "Property": "replay_succeeded"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "fccf51794bcea5a09b90",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "late_replay_status"
+              }
+            },
+            "Property": "replay_failed"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "0c0ea4f373611600a488",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "late_replay_status"
+              }
+            },
+            "Property": "avg_replay_latency_s"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

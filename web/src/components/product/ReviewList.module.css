@@ -1,0 +1,46 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.review {
+  padding-bottom: var(--sp-5);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.review:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.reviewHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--sp-2);
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+.reviewerName {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.reviewDate {
+  font-size: var(--fs-2xs);
+  color: var(--color-ink-faint);
+}
+
+.reviewText {
+  font-size: var(--fs-sm);
+  color: var(--color-ink-muted);
+  line-height: 1.6;
+}
+
+.empty {
+  color: var(--color-ink-muted);
+  font-size: var(--fs-sm);
+}

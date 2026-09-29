@@ -1,0 +1,89 @@
+.page {
+  padding: var(--sp-6) 0 var(--sp-9);
+  max-width: 720px;
+}
+
+.heading {
+  margin-bottom: var(--sp-1);
+  font-size: var(--fs-2xl);
+}
+
+.subheading {
+  color: var(--color-ink-muted);
+  margin-bottom: var(--sp-7);
+}
+
+.sectionHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--sp-4);
+}
+
+.sectionTitle {
+  font-size: var(--fs-lg);
+}
+
+.addressGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-7);
+}
+
+.addressCard {
+  background: var(--color-bg-elevated);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.addressLines {
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: var(--color-ink-muted);
+}
+
+.addressActions {
+  display: flex;
+  gap: var(--sp-3);
+  margin-top: var(--sp-2);
+}
+
+.linkButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.linkButtonDanger {
+  color: var(--color-danger);
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4);
+  margin-bottom: var(--sp-7);
+}
+
+.form > :first-child {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 640px) {
+  .addressGrid,
+  .form {
+    grid-template-columns: 1fr;
+  }
+}

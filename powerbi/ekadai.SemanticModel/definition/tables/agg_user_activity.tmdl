@@ -1,0 +1,104 @@
+table agg_user_activity
+	lineageTag: 7d6aa655-13a3-4f14-ab8f-339e88355466
+
+	measure 'Active Users' = DISTINCTCOUNT('agg_user_activity'[user_key])
+		formatString: #,0
+		lineageTag: 41b72ea0-875d-4290-9ba2-a3e237a08cef
+
+	measure 'Products Viewed' = SUM('agg_user_activity'[unique_products_viewed])
+		formatString: #,0
+		lineageTag: e62bafa1-9aa0-490e-9216-4027f27fab47
+
+	column date_key
+		dataType: int64
+		lineageTag: bb566611-3914-4014-951e-3a020a2961b1
+		summarizeBy: none
+		sourceColumn: date_key
+
+	column user_key
+		dataType: int64
+		lineageTag: 6898b259-bc0b-4ee2-8bf1-c2354e2e9dae
+		summarizeBy: none
+		sourceColumn: user_key
+
+	column session_count
+		dataType: int64
+		lineageTag: 73c37a77-ea67-4f39-b466-c208d23f9e5c
+		sourceColumn: session_count
+
+	column event_count
+		dataType: int64
+		lineageTag: beadb922-fee0-4f55-bc4f-6a84a66d584e
+		sourceColumn: event_count
+
+	column product_view_count
+		dataType: int64
+		lineageTag: b27ebc21-ef19-4d31-9a11-600d5fcf6a34
+		sourceColumn: product_view_count
+
+	column search_count
+		dataType: int64
+		lineageTag: 69eb8d48-8c0a-4cb4-b106-a5a3a33b7cdb
+		sourceColumn: search_count
+
+	column add_to_cart_count
+		dataType: int64
+		lineageTag: a927a1f3-69be-4417-9caf-147cf63fb764
+		sourceColumn: add_to_cart_count
+
+	column remove_from_cart_count
+		dataType: int64
+		lineageTag: 77c48e84-980d-44ee-b4b3-7de2c4d8e848
+		sourceColumn: remove_from_cart_count
+
+	column wishlist_added_count
+		dataType: int64
+		lineageTag: 65307f51-aafe-4ed5-84fe-aae7fa9ed39f
+		sourceColumn: wishlist_added_count
+
+	column wishlist_removed_count
+		dataType: int64
+		lineageTag: 4fdce8ee-c0b5-408b-9a01-6a32ba84993e
+		sourceColumn: wishlist_removed_count
+
+	column checkout_started_count
+		dataType: int64
+		lineageTag: 23589fb1-76a0-4617-ba32-e0201a7b2d18
+		sourceColumn: checkout_started_count
+
+	column order_created_count
+		dataType: int64
+		lineageTag: d719f881-0e35-462b-93c6-b48ecfa920f1
+		sourceColumn: order_created_count
+
+	column unique_products_viewed
+		dataType: int64
+		lineageTag: fb4aeea5-03a9-4584-8dd4-f5c8f3e959d5
+		sourceColumn: unique_products_viewed
+
+	column total_cart_additions
+		dataType: int64
+		lineageTag: 3ab7417d-bdd6-4e91-bea1-5db46e6e788b
+		sourceColumn: total_cart_additions
+
+	column total_cart_removals
+		dataType: int64
+		lineageTag: e14c852b-15d1-437a-8b45-a1a5c1fe8252
+		sourceColumn: total_cart_removals
+
+	column active_user
+		dataType: boolean
+		lineageTag: b789c1ac-36d7-4a3d-9ae1-9cc81ea515fa
+		sourceColumn: active_user
+
+	partition agg_user_activity = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405617818071366.6.azuredatabricks.net", "/sql/1.0/warehouses/68d5a8cb07485e9a", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    Catalog = Source{[Name="ekadai_databricks"]}[Data],
+				    Schema = Catalog{[Name="gold"]}[Data],
+				    Data = Schema{[Name="agg_user_activity"]}[Data]
+				in
+				    Data
+

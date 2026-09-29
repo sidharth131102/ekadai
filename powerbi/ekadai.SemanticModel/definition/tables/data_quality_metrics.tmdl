@@ -1,0 +1,122 @@
+table data_quality_metrics
+	lineageTag: e5d0327e-c2e5-4360-a9ab-cbc882e80e46
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d9583c65-3596-4b91-8fc7-c57893481cfe
+		summarizeBy: none
+		sourceColumn: date
+
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column bronze_records
+		dataType: int64
+		lineageTag: 06ba2b4c-f343-420f-9204-26609a564114
+		summarizeBy: sum
+		sourceColumn: bronze_records
+
+		annotation SummarizationSetBy = Automatic
+
+	column decode_failures
+		dataType: int64
+		lineageTag: ebfb5bd5-6368-40eb-a520-2715d9092429
+		summarizeBy: sum
+		sourceColumn: decode_failures
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_events
+		dataType: int64
+		lineageTag: 35ee8dc8-4e41-474b-8c20-0296508b6a6d
+		summarizeBy: sum
+		sourceColumn: valid_events
+
+		annotation SummarizationSetBy = Automatic
+
+	column quarantined
+		dataType: int64
+		lineageTag: 875a2236-6388-4a6f-8ac2-9020e8e89f2a
+		summarizeBy: sum
+		sourceColumn: quarantined
+
+		annotation SummarizationSetBy = Automatic
+
+	column malformed
+		dataType: int64
+		lineageTag: 448c033b-a421-458e-8284-887c2823a802
+		summarizeBy: sum
+		sourceColumn: malformed
+
+		annotation SummarizationSetBy = Automatic
+
+	column schema_invalid
+		dataType: int64
+		lineageTag: 8707a850-2cf5-4c3c-b881-49351d651d20
+		summarizeBy: sum
+		sourceColumn: schema_invalid
+
+		annotation SummarizationSetBy = Automatic
+
+	column business_rule_failures
+		dataType: int64
+		lineageTag: 4a6193b1-ae39-4f42-a6ba-8556a313f1e3
+		summarizeBy: sum
+		sourceColumn: business_rule_failures
+
+		annotation SummarizationSetBy = Automatic
+
+	column quarantine_rate
+		dataType: double
+		lineageTag: c6350e5d-841b-45c2-860d-3bb28293ea12
+		summarizeBy: sum
+		sourceColumn: quarantine_rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column late_events
+		dataType: int64
+		lineageTag: 3ddfe22c-2a9a-4fb8-b06a-08b30b2b813f
+		summarizeBy: sum
+		sourceColumn: late_events
+
+		annotation SummarizationSetBy = Automatic
+
+	column too_late_events
+		dataType: int64
+		lineageTag: 56e44971-7917-4e5f-973c-dbbabcb3b644
+		summarizeBy: sum
+		sourceColumn: too_late_events
+
+		annotation SummarizationSetBy = Automatic
+
+	column unresolved_events
+		dataType: int64
+		lineageTag: 0a04d395-c723-403b-81ff-026f527e25dc
+		summarizeBy: sum
+		sourceColumn: unresolved_events
+
+		annotation SummarizationSetBy = Automatic
+
+	column partially_resolved_events
+		dataType: int64
+		lineageTag: 717b1610-f922-4569-a1e6-3a2f9036ba9b
+		summarizeBy: sum
+		sourceColumn: partially_resolved_events
+
+		annotation SummarizationSetBy = Automatic
+
+	partition data_quality_metrics = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405617818071366.6.azuredatabricks.net", "/sql/1.0/warehouses/68d5a8cb07485e9a", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    Catalog = Source{[Name="ekadai_databricks"]}[Data],
+				    Schema = Catalog{[Name="ops"]}[Data],
+				    Data = Schema{[Name="data_quality_metrics"]}[Data]
+				in
+				    Data
+

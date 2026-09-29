@@ -1,0 +1,166 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "opslatencyv0",
+  "position": {
+    "x": 16,
+    "y": 16,
+    "z": 0,
+    "height": 330,
+    "width": 1248
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "latency_metrics"
+                    }
+                  },
+                  "Property": "hour"
+                }
+              },
+              "queryRef": "latency_metrics.hour",
+              "nativeQueryRef": "hour",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "latency_metrics"
+                    }
+                  },
+                  "Property": "end_to_end_p50_s"
+                }
+              },
+              "queryRef": "latency_metrics.end_to_end_p50_s",
+              "nativeQueryRef": "end_to_end_p50_s"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "latency_metrics"
+                    }
+                  },
+                  "Property": "end_to_end_p95_s"
+                }
+              },
+              "queryRef": "latency_metrics.end_to_end_p95_s",
+              "nativeQueryRef": "end_to_end_p95_s"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "latency_metrics"
+                    }
+                  },
+                  "Property": "ingestion_p50_s"
+                }
+              },
+              "queryRef": "latency_metrics.ingestion_p50_s",
+              "nativeQueryRef": "ingestion_p50_s"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Latency (seconds): end-to-end and ingestion'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "73ffd74b0e6015c0b4b6",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "latency_metrics"
+              }
+            },
+            "Property": "hour"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "57c759b2b349ab7d8263",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "latency_metrics"
+              }
+            },
+            "Property": "end_to_end_p50_s"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f451af8642706c193505",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "latency_metrics"
+              }
+            },
+            "Property": "end_to_end_p95_s"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "78c2e93736179d40890a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "latency_metrics"
+              }
+            },
+            "Property": "ingestion_p50_s"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+sqlalchemy>=2.0,<3.0
+alembic>=1.13,<2.0
+psycopg[binary]>=3.1,<4.0
+python-dotenv>=1.0,<2.0
+pytest>=8.0,<9.0
+
+# Phase 2a — backend API
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.30,<1.0
+pydantic-settings>=2.4,<3.0
+PyJWT>=2.9,<3.0
+bcrypt>=4.2,<5.0
+email-validator>=2.2,<3.0
+httpx>=0.27,<1.0
+
+# Phase 3a — behavioral event contracts
+fastavro>=1.9,<2.0
+
+# Phase 4 — Kafka + Schema Registry (producer client + Schema Registry client)
+confluent-kafka[schema-registry]>=2.3,<3.0

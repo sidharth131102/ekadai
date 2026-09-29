@@ -1,0 +1,118 @@
+{
+  "type": "record",
+  "name": "UserRegistered",
+  "namespace": "ekadai.events.user",
+  "fields": [
+    {
+      "name": "event_id",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "event_type",
+      "type": "string"
+    },
+    {
+      "name": "schema_version",
+      "type": "int"
+    },
+    {
+      "name": "event_timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
+      "name": "producer",
+      "type": "string"
+    },
+    {
+      "name": "context",
+      "type": {
+        "type": "record",
+        "name": "EventContext",
+        "namespace": "ekadai.events.common",
+        "fields": [
+          {
+            "name": "user_id",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "session_id",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "device",
+      "type": {
+        "type": "record",
+        "name": "DeviceInfo",
+        "namespace": "ekadai.events.common",
+        "fields": [
+          {
+            "name": "device_type",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "operating_system",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "browser",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "payload",
+      "type": {
+        "type": "record",
+        "name": "UserRegisteredPayload",
+        "namespace": "ekadai.events.user",
+        "fields": [
+          {
+            "name": "registration",
+            "type": {
+              "type": "record",
+              "name": "Registration",
+              "namespace": "ekadai.events.user",
+              "fields": [
+                {
+                  "name": "registration_method",
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "doc": "Emitted once, at successful registration."
+}

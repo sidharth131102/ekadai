@@ -1,0 +1,256 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "productsv2",
+  "position": {
+    "x": 16,
+    "y": 448,
+    "z": 0,
+    "height": 256,
+    "width": 1248
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "agg_product_attribution"
+                    }
+                  },
+                  "Property": "product_name"
+                }
+              },
+              "queryRef": "agg_product_attribution.product_name",
+              "nativeQueryRef": "product_name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "agg_product_attribution"
+                    }
+                  },
+                  "Property": "viewing_users"
+                }
+              },
+              "queryRef": "agg_product_attribution.viewing_users",
+              "nativeQueryRef": "viewing_users"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "agg_product_attribution"
+                    }
+                  },
+                  "Property": "converted_users"
+                }
+              },
+              "queryRef": "agg_product_attribution.converted_users",
+              "nativeQueryRef": "converted_users"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "agg_product_attribution"
+                    }
+                  },
+                  "Property": "7d View to Purchase %"
+                }
+              },
+              "queryRef": "agg_product_attribution.7d View to Purchase %",
+              "nativeQueryRef": "7d View to Purchase %"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "agg_product_attribution"
+                    }
+                  },
+                  "Property": "avg_conversion_seconds"
+                }
+              },
+              "queryRef": "agg_product_attribution.avg_conversion_seconds",
+              "nativeQueryRef": "avg_conversion_seconds"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "agg_product_attribution"
+                    }
+                  },
+                  "Property": "median_conversion_seconds"
+                }
+              },
+              "queryRef": "agg_product_attribution.median_conversion_seconds",
+              "nativeQueryRef": "median_conversion_seconds"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'7-day view → purchase attribution'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "5ce918d6a48c4c434979",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "agg_product_attribution"
+              }
+            },
+            "Property": "product_name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2fd993a4cab27a70d430",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "agg_product_attribution"
+              }
+            },
+            "Property": "viewing_users"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "b53d2e79076150e39e96",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "agg_product_attribution"
+              }
+            },
+            "Property": "converted_users"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "bee27da074051e067d90",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "agg_product_attribution"
+              }
+            },
+            "Property": "7d View to Purchase %"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "8bed85750ba36c26e4a8",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "agg_product_attribution"
+              }
+            },
+            "Property": "avg_conversion_seconds"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "96cc47e8c3cd8da68650",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "agg_product_attribution"
+              }
+            },
+            "Property": "median_conversion_seconds"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

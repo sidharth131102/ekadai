@@ -1,0 +1,129 @@
+{
+  "type": "record",
+  "name": "OrderCreated",
+  "namespace": "ekadai.events.order",
+  "fields": [
+    {
+      "name": "event_id",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "event_type",
+      "type": "string"
+    },
+    {
+      "name": "schema_version",
+      "type": "int"
+    },
+    {
+      "name": "event_timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
+      "name": "producer",
+      "type": "string"
+    },
+    {
+      "name": "context",
+      "type": {
+        "type": "record",
+        "name": "EventContext",
+        "namespace": "ekadai.events.common",
+        "fields": [
+          {
+            "name": "user_id",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "session_id",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "device",
+      "type": {
+        "type": "record",
+        "name": "DeviceInfo",
+        "namespace": "ekadai.events.common",
+        "fields": [
+          {
+            "name": "device_type",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "operating_system",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "browser",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "payload",
+      "type": {
+        "type": "record",
+        "name": "OrderCreatedPayload",
+        "namespace": "ekadai.events.order",
+        "fields": [
+          {
+            "name": "order_id",
+            "type": "string"
+          },
+          {
+            "name": "checkout_id",
+            "type": "string"
+          },
+          {
+            "name": "item_count",
+            "type": "int"
+          },
+          {
+            "name": "total_quantity",
+            "type": "int"
+          },
+          {
+            "name": "order_value",
+            "type": {
+              "type": "bytes",
+              "logicalType": "decimal",
+              "precision": 18,
+              "scale": 2
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "doc": "Server-emitted. Behavioral milestone only \u2014 NOT authoritative for order state (CDC is)."
+}

@@ -1,0 +1,80 @@
+table dim_date
+	lineageTag: 6dbf0d82-23dc-45fd-9ec9-2eb8299a399b
+	dataCategory: Time
+
+	column date_key
+		dataType: int64
+		lineageTag: 5d9bf179-143e-4f31-8824-36ae99340f34
+		summarizeBy: none
+		sourceColumn: date_key
+
+	column date
+		dataType: dateTime
+		isKey
+		formatString: Long Date
+		lineageTag: c11197b9-005a-45d3-8a9f-a43038b6db87
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column day
+		dataType: int64
+		lineageTag: a936083d-ad0b-4aea-9906-e30fcd55d68c
+		summarizeBy: none
+		sourceColumn: day
+
+	column day_name
+		dataType: string
+		lineageTag: e779f735-ce1b-466f-89c7-036deea4a303
+		sourceColumn: day_name
+
+	column week_of_year
+		dataType: int64
+		lineageTag: ec05972c-33fe-444d-8203-e3fe5d0998e4
+		summarizeBy: none
+		sourceColumn: week_of_year
+
+	column month
+		dataType: int64
+		lineageTag: e73c4b76-18d9-481e-8d06-d513165c4c7c
+		summarizeBy: none
+		sourceColumn: month
+
+	column month_name
+		dataType: string
+		lineageTag: 2e7eaaab-583b-43b8-b74a-afeb3fcb683b
+		sourceColumn: month_name
+
+	column quarter
+		dataType: int64
+		lineageTag: 066d4a92-b250-4e8a-9b1b-86b97ef65bdb
+		summarizeBy: none
+		sourceColumn: quarter
+
+	column year
+		dataType: int64
+		lineageTag: bf83f79c-3b35-415c-94a6-99992c38394a
+		summarizeBy: none
+		sourceColumn: year
+
+	column is_weekend
+		dataType: boolean
+		lineageTag: 3dfd1793-cb87-4202-b3ce-5ce787eff246
+		sourceColumn: is_weekend
+
+	partition dim_date = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405617818071366.6.azuredatabricks.net", "/sql/1.0/warehouses/68d5a8cb07485e9a", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    Catalog = Source{[Name="ekadai_databricks"]}[Data],
+				    Schema = Catalog{[Name="gold"]}[Data],
+				    Data = Schema{[Name="dim_date"]}[Data]
+				in
+				    Data
+
+	annotation PBI_ResultType = Table
+

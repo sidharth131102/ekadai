@@ -1,0 +1,112 @@
+{
+  "type": "record",
+  "name": "WishlistRemoved",
+  "namespace": "ekadai.events.cart",
+  "fields": [
+    {
+      "name": "event_id",
+      "type": {
+        "type": "string",
+        "logicalType": "uuid"
+      }
+    },
+    {
+      "name": "event_type",
+      "type": "string"
+    },
+    {
+      "name": "schema_version",
+      "type": "int"
+    },
+    {
+      "name": "event_timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
+      "name": "producer",
+      "type": "string"
+    },
+    {
+      "name": "context",
+      "type": {
+        "type": "record",
+        "name": "EventContext",
+        "namespace": "ekadai.events.common",
+        "fields": [
+          {
+            "name": "user_id",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "session_id",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "device",
+      "type": {
+        "type": "record",
+        "name": "DeviceInfo",
+        "namespace": "ekadai.events.common",
+        "fields": [
+          {
+            "name": "device_type",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "operating_system",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "browser",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "payload",
+      "type": {
+        "type": "record",
+        "name": "WishlistRemovedPayload",
+        "namespace": "ekadai.events.cart",
+        "fields": [
+          {
+            "name": "wishlist_id",
+            "type": "string"
+          },
+          {
+            "name": "product_id",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  ],
+  "doc": "Server-emitted. Keyed by user_id."
+}

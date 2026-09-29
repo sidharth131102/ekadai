@@ -1,0 +1,91 @@
+table fact_order_items
+	lineageTag: 7de2f3b3-e63a-44e4-8249-7f505e690827
+
+	column order_item_key
+		dataType: int64
+		lineageTag: 1b84f8ef-a15f-420b-b3af-104f9380d3ed
+		summarizeBy: none
+		sourceColumn: order_item_key
+
+	column order_item_id
+		dataType: string
+		lineageTag: 3de244df-e3fe-494b-b5cb-1229c5464a6b
+		sourceColumn: order_item_id
+
+	column order_id
+		dataType: string
+		lineageTag: 09b4a3d8-936d-483f-af19-5fe8b6e0dbbe
+		sourceColumn: order_id
+
+	column order_key
+		dataType: int64
+		lineageTag: 98ed8f1b-5745-400a-8810-ff10f08dfcf0
+		summarizeBy: none
+		sourceColumn: order_key
+
+	column product_key
+		dataType: int64
+		lineageTag: 7bfc34bb-aeb8-40db-a7e9-3279c846dca0
+		summarizeBy: none
+		sourceColumn: product_key
+
+	column user_key
+		dataType: int64
+		lineageTag: 9b606967-7d47-4cfb-ac90-38a5a4c87ec0
+		summarizeBy: none
+		sourceColumn: user_key
+
+	column date_key
+		dataType: int64
+		lineageTag: f7cad6ad-8bde-4f8a-b5f2-932fe2806451
+		summarizeBy: none
+		sourceColumn: date_key
+
+	column quantity
+		dataType: int64
+		lineageTag: 1625396a-b621-45a0-8ef8-084396a8c21c
+		sourceColumn: quantity
+
+	column unit_price
+		dataType: double
+		formatString: #,0.00
+		lineageTag: beee5106-aaa0-4bd9-857c-b19024488dfc
+		summarizeBy: sum
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+	column discount_amount
+		dataType: double
+		formatString: #,0.00
+		lineageTag: df826f6b-cf90-4b93-b2e0-2d9767ef29d1
+		summarizeBy: sum
+		sourceColumn: discount_amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column line_revenue
+		dataType: double
+		formatString: #,0.00
+		lineageTag: a4e03f75-5f4f-4d1d-ab51-e9b7f07ae846
+		summarizeBy: sum
+		sourceColumn: line_revenue
+
+		annotation SummarizationSetBy = Automatic
+
+	column currency
+		dataType: string
+		lineageTag: 4e743d40-22ec-4315-9b9a-225304c578a9
+		sourceColumn: currency
+
+	partition fact_order_items = m
+		mode: directQuery
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-7405617818071366.6.azuredatabricks.net", "/sql/1.0/warehouses/68d5a8cb07485e9a", [Catalog=null, Database=null, EnableAutomaticProxyDiscovery=null]),
+				    Catalog = Source{[Name="ekadai_databricks"]}[Data],
+				    Schema = Catalog{[Name="gold"]}[Data],
+				    Data = Schema{[Name="fact_order_items"]}[Data]
+				in
+				    Data
+
