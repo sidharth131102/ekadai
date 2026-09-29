@@ -3,7 +3,9 @@
 A real e-commerce application whose transactions and clickstream flow in real time through
 Kafka and Change Data Capture into a Databricks lakehouse (Bronze → Silver → Gold), with
 observability, recovery tooling and Power BI on top. `MASTER_BUILD_PROMPT.md` is the
-authoritative contract; this document explains what was built and why (§110).
+authoritative contract; this document explains what was built and why (§110). For the
+exhaustive, interview-ready version (data models, business rules, queries, optimisations,
+guarantees, likely questions), see [PROJECT_DEEP_DIVE.md](PROJECT_DEEP_DIVE.md).
 
 ## 1. Objective
 
@@ -20,8 +22,9 @@ Show an end-to-end, production-shaped data platform on a real application rather
 
 ```mermaid
 flowchart LR
-  subgraph App["Application (FastAPI + React)"]
-    UI[React SPA] -->|REST + X-Session-Id| API[FastAPI]
+  subgraph App["Application"]
+    UI["React SPA (Vercel)"] -->|HTTPS REST + X-Session-Id| CADDY[Caddy / Let's Encrypt]
+    CADDY --> API[FastAPI on the VM]
   end
   API -->|SQL| PG[(Supabase PostgreSQL)]
   API -->|Avro events| K
@@ -48,7 +51,11 @@ flowchart LR
 - **Supabase** hosts Postgres. The app reaches it through the IPv4 session pooler; Debezium
   uses the IPv6 direct connection, because logical replication can't go through a pooler.
 - **One Azure VM** (Standard_D2ns_v6, East US, dual-stack) runs Kafka, Schema Registry, Kafka
-  Connect with Debezium, and Airflow, each in Docker.
+  Connect with Debezium, Airflow, and the **FastAPI backend behind Caddy** (automatic HTTPS for
+  `ekadai-api.eastus.cloudapp.azure.com`), each in Docker. The API joins the Kafka Docker
+  network, so its events go to `kafka:9092` without leaving the VM.
+- **Vercel** serves the React storefront (`https://ekadai-rouge.vercel.app`). It's static, with
+  the API URL baked in at build time.
 - **Azure Databricks** (Premium, Unity Catalog, ADLS Gen2 `ekadailake`) runs **one serverless
   Lakeflow Declarative Pipeline** with four sources (Bronze, Silver events, Silver CDC, Gold),
   plus a serverless SQL warehouse for ad-hoc SQL, Airflow and Power BI.
@@ -201,8 +208,13 @@ migrations.
 
 ## 16. Power BI
 
-See [powerbi.md](powerbi.md): connection, star-schema model, DAX measures, and the Business vs
-Platform Observability pages (§103–104).
+- The Power BI project is **generated as code**: `powerbi/generate_pbip.py` writes a TMDL
+  semantic model and a PBIR report from the live table schemas.
+  - 25 tables, 23 relationships (no fact-to-fact), 33 DAX measures.
+  - 9 pages: 5 business and 4 platform observability (§103–104).
+- `--mode import` builds a snapshot for screenshots. `--mode directquery` builds a live report;
+  with page refresh, a storefront action shows up in about 1.5 min.
+- See [powerbi.md](powerbi.md).
 
 ## 17. Failure scenarios
 
@@ -216,7 +228,7 @@ are in `scripts/failure_tests.py`.
   - On the fixed credit budget, it runs **triggered**: each update processes everything new and
     stops. Kafka's 7-day retention absorbs the gaps.
   - Flip it to continuous for live operation or demos. Latency is then ~13s end to end for
-    events and ~23s for CDC.
+    events, ~23s for CDC, and ~1.5 min from a click to the Gold materialized views.
 - The SQL warehouse auto-stops after 1 minute; the Airflow DAGs wake it hourly or less often.
 - The VM (D2ns_v6) costs little and can be deallocated. Its IPs are Standard (static), so
   Kafka's advertised address survives.
@@ -236,6 +248,14 @@ are in `scripts/failure_tests.py`.
     `debezium/register_connector.py`.
   - Databricks: `databricks/provision.ps1` (storage, workspace, Unity Catalog, NSG rule,
     pipeline, views).
+  - API: `azure/vm-stack/api/` (FastAPI image + Caddy). The Azure public IP has a DNS label and
+    NSG rule `allow-https-api` opens 80/443. Kafka, SSH and the Airflow UI stay limited to the
+    dev IP.
+  - Storefront: `vercel deploy --prod --build-env VITE_API_BASE_URL=https://<api-domain>` from
+    `web/` (`vercel.json` rewrites deep links to `index.html`), then add the Vercel origin to
+    the API's `CORS_ORIGINS`.
+    - An HTTPS storefront can't call an HTTP API (mixed content); that's why the API sits
+      behind Caddy.
   - Secrets live only in `.env` / the VM's `airflow.env`, never in git.
 
 ## 22. Design trade-offs

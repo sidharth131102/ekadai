@@ -18,6 +18,49 @@ Template per entry:
 
 ---
 
+## 2026-09-29 — Power BI DirectQuery refused to open: auto date tables force Import mode
+
+**Phase:** 14 — Power BI
+**Symptom:** After switching the user-customised report to DirectQuery: "DirectQuery partitions
+are not allowed in 'dim_user' because it has a datetime-to-date relationship with another
+table."
+**Root cause:** While the report was in Import mode, Power BI Desktop's *Auto date/time* had
+added 30 hidden `LocalDateTable_*` / `DateTableTemplate_*` tables, linked to every datetime
+column through `variation` blocks and relationships. Those relationships need Import mode.
+**Fix:** Deleted the auto date tables, their 29 `variation` blocks and 29 relationships (52 → 23,
+the model's own), and their model refs. Set `__PBI_TimeIntelligenceEnabled = 0`. The user's
+report and visuals were untouched (no visual used the hierarchies; checked first). Opened in
+DirectQuery with live data.
+**Status:** Fixed. `docs/powerbi.md` records this gotcha, along with "don't regenerate over a
+customised report", which cost one round of the user's edits before they were recovered
+from the still-open Desktop session.
+
+## 2026-09-29 — Gold dimensions could be built from stale SCD2 data (dependency hidden by UC views)
+
+**Phase:** 11 — Gold
+**Symptom:** The first successful update logged warnings: "The downstream table
+'…silver_users_history' is referenced when creating the upstream … 'gold.dim_user'. Circular
+dependencies are not supported". The same appeared for categories.
+**Root cause:** Gold read SCD2 data through the Unity Catalog views `silver_users` /
+`silver_categories` (created outside the pipeline). The pipeline can't see through a UC view,
+so it didn't know `dim_user` depends on `silver_users_history` and couldn't order the refresh.
+The dimensions could have been computed before the history tables updated.
+**Fix:** `gold_pipeline.py` reads the pipeline's `*_history` tables directly, with the same
+mapping as the views (`scd2()` helper). The next update completed with 0 warnings. The UC views
+remain for humans and BI.
+**Status:** Fixed.
+
+## 2026-09-29 — Gold session facts failed analysis: ambiguous `user_id`
+
+**Phase:** 11 — Gold
+**Symptom:** `[AMBIGUOUS_REFERENCE] Reference 'user_id' is ambiguous, could be: e.user_id,
+o.user_id` in `fact_sessions` and `agg_conversion_funnel`.
+**Root cause:** The per-session aggregation joined events to current orders, and both have
+`user_id`. The first draft left columns unqualified. It was only syntax-checked offline, and
+the first live run caught it.
+**Fix:** Fully qualified every column in `SESSION_FACTS`.
+**Status:** Fixed.
+
 ## 2026-09-29 — Airflow DAG would have kept the SQL warehouse running most of the time
 
 **Phase:** 10 — Late-data replay (caught right after deploying)

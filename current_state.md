@@ -4,8 +4,9 @@ Living snapshot — always describes what's actually built and runnable *right n
 aspiration. Rewritten at the end of each session/phase. Read this first when picking the
 project back up.
 
-**Last updated:** 2026-09-29 (Phases 11–16 code-complete while all cloud compute is STOPPED;
-verification happens in one restart session, see "Restart runbook" at the end)
+**Last updated:** 2026-09-29 (restart session done: Gold verified, observability live, app
+deployed to Vercel + VM API, Power BI working live, code on GitHub. See "Restart session
+results" at the end.)
 
 **Deadline:** Azure free credits (~₹18k) expire **2026-10-07** — the remaining phases need to
 land before then; the user asked to move fast.
@@ -719,7 +720,7 @@ restart once. Current state:
 
 ### Phases 11–16, built offline (not yet run)
 
-- **Gold** (`databricks/gold_pipeline.py`, 16 materialized views in `ekadai_databricks.gold`):
+- **Gold** (`databricks/gold_pipeline.py`, 15 materialized views in `ekadai_databricks.gold`):
   - five dimensions, four facts, six aggregates, following §74–91 field lists;
   - deterministic hashed keys, "as of" dimension joins, 30-min sessions, 15-min abandonment,
     cancellations on the cancellation date, and 7-day attribution;
@@ -772,3 +773,81 @@ restart once. Current state:
    it back.
 9. **Stop everything**: the pipeline (triggered/idle), the warehouse, pause the DAGs, and
    `az vm deallocate`.
+
+## Restart session results (2026-09-29)
+
+**Gold (Phases 11–12): verified.**
+- The first update surfaced two issues, both fixed and logged in `bugs_and_fixes.md`:
+  - an ambiguous `user_id` in the session query;
+  - Gold reading SCD2 through UC views, which hid the dependency from the pipeline graph (the
+    dims now read `*_history` directly).
+- After that: COMPLETED, 0 warnings.
+- 40 simulated sessions ran through the real app (22 browse / 8 cart / 4 abandoned checkout /
+  6 orders).
+- Checks:
+  - 9 orders in CDC = `fact_orders` = `agg_order_metrics`;
+  - net sales = Σ line revenue (₹75,774);
+  - 409 of 410 events admitted (the excluded one references a `zz-test` product);
+  - every order line resolves a product version;
+  - the funnel for 2026-09-29 was 43 → 18 → 12 → 8, with 4 abandoned (visible once the 15 min
+    passed) and 2 cancelled.
+
+**Observability (Phase 13).**
+- `ops` schema created; the pipeline event log is published to `ops.pipeline_event_log`.
+- All 13 objects in `ops_views.sql` were created.
+- Airflow was rebuilt with `confluent-kafka` and joined to the `vm-stack_default` network. All
+  4 DAGs load with no import errors.
+- `kafka_cdc_health` ran: 38 partitions and the connector sampled.
+- `backfill_reconcile` and `lakehouse_maintenance` haven't been triggered yet.
+
+**Deployment.**
+- **API**: `azure/vm-stack/api/` (FastAPI image + Caddy) on the VM.
+  - Azure DNS label `ekadai-api` → https://ekadai-api.eastus.cloudapp.azure.com, with a Let's
+    Encrypt certificate obtained automatically.
+  - NSG `allow-https-api` opens 80/443 to the Internet.
+  - Secrets live only in `~/vm-stack/api/api.env` (chmod 600, gitignored): the Supabase pooler
+    URL, a new random JWT key, and `CORS_ORIGINS`.
+  - Events go to `kafka:9092` inside the VM.
+- **Storefront**: Vercel project `ekadai` (team `sidharth131102s-projects`) →
+  **https://ekadai-rouge.vercel.app**.
+  - `web/vercel.json` rewrites deep links to `index.html`.
+  - Deployed with `vercel deploy --prod --build-env VITE_API_BASE_URL=…`.
+  - The CORS preflight from that origin was verified.
+- **Live latency** (continuous pipeline, public API): event → Silver 58 s on the first run
+  after start; → Gold `fact_events` ~92 s.
+
+**Power BI (Phase 14).**
+- `powerbi/generate_pbip.py` generates the PBIP from `powerbi/columns.txt`.
+- Opened in Desktop; the numbers matched Gold exactly (9 orders, ₹75.77K, AOV ₹8.42K, 22.2%
+  cancellation).
+- Authenticated with a 7-day Databricks personal access token (the personal Microsoft account
+  doesn't work with Entra sign-in).
+- The user customised the visuals. Switching that version to DirectQuery needed: only the
+  partition modes flipped, plus removing Desktop's 30 auto date tables (they force Import).
+  Auto date/time is now off.
+
+**GitHub.** Public repo https://github.com/sidharth131102/ekadai, initial commit `2836ebe` on
+`main`.
+- Before pushing, the only real secret in the tree was removed: the Supabase password quoted in
+  a `bugs_and_fixes.md` error message.
+- **Recommended**: change the Supabase database password anyway (it appeared in chat and local
+  files), then update `.env` and the VM's `api.env`.
+
+**Still running at the time of writing** (for the screen recording):
+- the VM (Kafka, Debezium, Airflow, API, Caddy);
+- the pipeline in **continuous** mode;
+- the SQL warehouse (DirectQuery).
+
+**Shutdown checklist:**
+- pipeline → triggered;
+- warehouse stop;
+- `az vm deallocate` (takes the public API offline; the Vercel storefront stays up but can't
+  load data);
+- revoke the Power BI and Airflow Databricks tokens.
+
+**Open items:**
+- trigger `backfill_reconcile` (run / rerun / failure / corrective) and `lakehouse_maintenance`;
+- the broker-outage and Debezium-restart failure tests;
+- Gold late-replay admission;
+- product images for the remaining categories;
+- rotate the Supabase password.

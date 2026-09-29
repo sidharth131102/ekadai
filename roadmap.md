@@ -22,12 +22,12 @@ state — this file is not rewritten on every commit. Details of what's actually
 | 8 | Silver CDC + SCD2 | `silver_cdc_orders/order_items` (change log), `silver_products/categories/users` (SCD2) — streaming in the same pipeline, ordered by WAL position (~23s DB commit → Silver); 5 CDC tables set to `REPLICA IDENTITY FULL` | Done | Databricks |
 | 9 | Reference resolution | `reference_resolution_queue`, streaming resolution, in-place Silver correction — race-free single-flow design, ~8s from reference arrival to corrected event | Done | Databricks |
 | 10 | Late-data replay | `is_late`/`is_too_late` (10 + 5 min, configurable), `late_data_replay_queue`, hourly Airflow `late_data_replay` DAG (Airflow now on the VM) | Done | Databricks + Airflow (Azure VM) |
-| 11 | Gold facts/dimensions | `dim_*`, `fact_events/sessions/orders/order_items` as materialized views (`databricks/gold_pipeline.py`) | Built — verify at restart | Databricks |
-| 12 | Gold aggregates | `agg_user_activity/conversion_funnel/product_performance/daily_revenue/order_metrics` + `agg_product_attribution` | Built — verify at restart | Databricks |
-| 13 | Observability | `ops` schema: event log, `pipeline_runs`, stage metrics, latency, data quality, queues, Kafka lag, retention; DAGs `kafka_cdc_health`, `backfill_reconcile`, `lakehouse_maintenance` | Built — verify at restart | Databricks + Airflow |
-| 14 | Power BI | Guide: connection, model, measures, pages (`docs/powerbi.md`); report built by the user in Power BI Desktop | Guide done — report pending | Power BI Desktop |
-| 15 | Failure/recovery testing | `scripts/failure_tests.py` + matrix `docs/failure_testing.md`; many scenarios already verified in Phases 7–10 | Partly verified — rest at restart | — |
-| 16 | Documentation + portfolio polish | `README.md`, `docs/architecture.md` (§110 items, diagram) | Done | — |
+| 11 | Gold facts/dimensions | `dim_*`, `fact_events/sessions/orders/order_items` as materialized views (`databricks/gold_pipeline.py`) | Done — verified on live data (9/9/9 orders, ₹ totals reconcile) | Databricks |
+| 12 | Gold aggregates | `agg_user_activity/conversion_funnel/product_performance/daily_revenue/order_metrics` + `agg_product_attribution` | Done — verified | Databricks |
+| 13 | Observability | `ops` schema: event log, `pipeline_runs`, stage metrics, latency, data quality, queues, Kafka lag, retention; DAGs `kafka_cdc_health`, `backfill_reconcile`, `lakehouse_maintenance` | Done — views live, health DAG run; backfill/maintenance DAGs loaded but not yet triggered | Databricks + Airflow |
+| 14 | Power BI | Generated PBIP (`powerbi/generate_pbip.py`): 25 tables, 23 relationships, 33 measures, 9 pages; Import + DirectQuery/live | Done | Power BI Desktop |
+| 15 | Failure/recovery testing | `scripts/failure_tests.py` + matrix `docs/failure_testing.md` | Mostly verified — outage/restart/backfill scenarios still to run | — |
+| 16 | Documentation + deployment | `README.md`, `docs/architecture.md`, `docs/PROJECT_DEEP_DIVE.md`; storefront on Vercel, API on the VM behind Caddy/HTTPS; public GitHub repo | Done | Vercel + Azure VM |
 
 ## Notes
 
